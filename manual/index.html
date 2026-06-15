@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VERTIC // Manual de Identidade Visual</title>
+  <title>VERTIC // Manual de Identidade Visual v2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -19,10 +19,27 @@
       --text-primary: #ffffff;
       --text-secondary: #a1a1aa;
       --text-muted: #52525b;
-      --accent-cyan: #06b6d4;
+
+      /* Holding — ciano reservado só para a VERTIC */
+      --accent-cyan: #06b6d4;        /* canônico, tema escuro */
+      --accent-cyan-light: #0e7490;  /* ciano em fundo claro */
+      --accent-cyan-fx: #00f0ff;     /* glow/FX, só escuro */
       --accent-cyan-glow: rgba(6, 182, 212, 0.15);
-      --accent-gold: #B89454;
+
+      /* Dourado — Wealth */
+      --accent-gold: #B89454;        /* tema claro */
+      --accent-gold-dark: #E5C158;   /* acento em tema escuro */
       --accent-gold-glow: rgba(184, 148, 84, 0.15);
+
+      /* Cores de vértice */
+      --v-marketing: #a855f7;
+      --v-consultoria: #3b82f6;
+      --v-tech: #f97316;
+      --v-wealth: #B89454;
+
+      --haste: #71717a;              /* haste neutra do V-Node */
+      --coral-retired: #f43f5e;      /* aposentado como marca */
+
       --font-sans: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -197,6 +214,15 @@
       color: var(--text-primary);
     }
 
+    h3.sub {
+      font-size: 16px;
+      font-weight: 700;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+    }
+
     p {
       color: var(--text-secondary);
       font-size: 15px;
@@ -226,9 +252,18 @@
       font-size: 12px;
     }
 
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--accent-cyan);
+    }
+
     .grid-2 {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
       gap: 20px;
     }
 
@@ -297,10 +332,51 @@
         linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
     }
 
-    .logo-preview img {
-      max-width: 90%;
-      max-height: 95%;
-      object-fit: contain;
+    /* ---- Lockup inline (Mark A) ---- */
+    .lockup {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .lockup-icon {
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+    }
+
+    .lockup-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .lockup-brand {
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+      transition: color 0.3s ease;
+    }
+
+    .logo-preview.light-bg .lockup-brand {
+      color: #04070c;
+    }
+
+    .lockup-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Triple V-Node inline */
+    .triple-v {
+      width: 90px;
+      height: 90px;
     }
 
     .logo-details {
@@ -316,6 +392,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      flex-wrap: wrap;
     }
 
     .badge {
@@ -326,75 +403,28 @@
       font-weight: bold;
     }
 
-    .badge-dark {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+    .badge-asset {
+      background: rgba(16, 185, 129, 0.1);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
-    .badge-light {
-      background: rgba(6, 182, 212, 0.1);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(6, 182, 212, 0.25);
+    .badge-pending {
+      background: rgba(245, 158, 11, 0.1);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
     }
 
-    .badge-special {
-      background: rgba(184, 148, 84, 0.1);
-      color: var(--accent-gold);
-      border: 1px solid rgba(184, 148, 84, 0.25);
+    .badge-cap {
+      background: rgba(161, 161, 170, 0.1);
+      color: var(--text-secondary);
+      border: 1px solid rgba(161, 161, 170, 0.25);
     }
 
     .logo-desc {
       font-size: 12.5px;
       color: var(--text-secondary);
       min-height: 38px;
-    }
-
-    .logo-actions {
-      display: flex;
-      width: 100%;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .btn {
-      flex-grow: 1;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn-svg {
-      background: transparent;
-      border: 1px solid var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
-
-    .btn-svg:hover {
-      background: var(--accent-cyan);
-      color: var(--bg-absolute);
-      box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
-    }
-
-    .btn-png {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-primary);
-    }
-
-    .btn-png:hover {
-      background: var(--text-primary);
-      color: var(--bg-absolute);
     }
 
     .swatches {
@@ -437,6 +467,15 @@
       color: var(--accent-cyan);
     }
 
+    .swatch-use {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
     .typo-display {
       border: 1px solid var(--border-color);
       border-radius: 8px;
@@ -458,23 +497,94 @@
       color: var(--text-secondary);
     }
 
+    .codeblock {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      line-height: 1.6;
+      background: #020306;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px 18px;
+      color: #94a3b8;
+      overflow-x: auto;
+      white-space: pre;
+      margin-top: 14px;
+    }
+
+    .codeblock .c { color: var(--accent-cyan); }
+
+    .symbol-stage {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .symbol-box {
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #020306;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .shift-card {
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    .shift-bar {
+      height: 64px;
+      border-radius: 8px;
+      margin: 14px 0;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .shift-ascension {
+      background: linear-gradient(90deg, #04070c 0%, #06b6d4 28%, #f8fafc 68%, #B89454 100%);
+    }
+
+    .shift-darkchoice {
+      background: linear-gradient(90deg, #f8fafc 0%, #a855f7 38%, #04070c 82%);
+    }
+
+    .shift-name {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
     .warning-panel {
       border-left: 4px solid #ef4444;
       background: rgba(239, 68, 68, 0.03);
     }
 
-    .shift-banner {
+    .vertices-banner {
       background: radial-gradient(circle at right, var(--accent-gold-glow) 0%, transparent 60%);
       border: 1px solid rgba(184, 148, 84, 0.2);
     }
 
-    .shift-banner .section-tag {
-      color: var(--accent-gold);
+    .note {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      border-top: 1px dashed var(--border-color);
+      padding-top: 14px;
+      margin-top: 8px;
     }
 
-    .shift-banner li::before {
-      color: var(--accent-gold);
-    }
+    .logo-img-dark { display: block; max-width: 85%; height: auto; max-height: 55px; }
+    .logo-img-light { display: none; max-width: 85%; height: auto; max-height: 55px; }
+    .light-bg .logo-img-dark { display: none; }
+    .light-bg .logo-img-light { display: block; }
 
     @media (max-width: 980px) {
       .wrapper {
@@ -505,95 +615,125 @@
     <!-- Sidebar Navigation -->
     <aside>
       <div class="sidebar-header">
-        <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 25L50 75L80 25" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"
+        <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 25 L50 75 L80 25" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"
             stroke-linejoin="round" />
           <circle cx="50" cy="75" r="10" fill="#06b6d4" />
         </svg>
         <div>
           <h1>VERTIC</h1>
-          <div class="tech-label">BRAND MANUAL v1.2</div>
+          <div class="tech-label">BRAND MANUAL v2 // ARQ. B</div>
         </div>
       </div>
       <nav>
         <a href="#welcome" class="active"><span class="nav-num">01 //</span> Visão Geral</a>
-        <a href="#noir"><span class="nav-num">02 //</span> Estética UI/UX</a>
-        <a href="#colors"><span class="nav-num">03 //</span> Cores</a>
+        <a href="#noir"><span class="nav-num">02 //</span> Estética Finance Noir</a>
+        <a href="#colors"><span class="nav-num">03 //</span> Cores & Tokens</a>
         <a href="#typography"><span class="nav-num">04 //</span> Tipografia</a>
-        <a href="#logos"><span class="nav-num">05 //</span> Logo Oficial</a>
-        <a href="#special"><span class="nav-num">06 //</span> Versões Especiais</a>
-        <a href="#group"><span class="nav-num">07 //</span> Empresas do Grupo</a>
-        <a href="#proposals"><span class="nav-num">08 //</span> Propostas Alternativas</a>
-        <a href="#rules"><span class="nav-num">09 //</span> Regras de Uso</a>
+        <a href="#symbols"><span class="nav-num">05 //</span> Símbolos V-Node</a>
+        <a href="#vertices"><span class="nav-num">06 //</span> As 4 Vértices</a>
+        <a href="#shift"><span class="nav-num">07 //</span> The Shift</a>
+        <a href="#rules"><span class="nav-num">08 //</span> Regras de Uso</a>
       </nav>
     </aside>
 
     <!-- Main Content -->
     <main>
-      <!-- Section 1: Welcome -->
+      <!-- 01: Welcome -->
       <section id="welcome" class="panel">
         <span class="section-tag">01 // CONCEITO E VISÃO</span>
         <h2>VERTIC: O Ecossistema Integrado</h2>
-        <p>A <strong>VERTIC</strong> é uma holding institucional e ecossistema integrado estruturado sob o modelo de
-          <em>Full Stack Advisor</em>. Atuamos como o Sistema Operacional definitivo para o empresário de alto valor
-          (HNWIs), unificando três eixos críticos que tradicionalmente operam isolados:</p>
+        <p>A <strong>VERTIC</strong> é uma holding integradora no modelo <em>Full Stack Advisor</em> — o Sistema
+          Operacional do empresário de alto valor (HNWIs). A holding é o portal/núcleo; as entregas acontecem em
+          <strong>quatro vértices autônomas</strong>, cada uma com cor e território próprios, herdando o DNA visual da
+          marca-mãe.</p>
         <ul>
-          <li><strong>Eficiência Operacional:</strong> Soluções avançadas em tecnologia e escala prática (Tech &
-            Growth).</li>
-          <li><strong>Eficiência Estratégica:</strong> Otimização de processos executivos, cultura e governança
-            corporativa (Advisory).</li>
-          <li><strong>Eficiência Patrimonial:</strong> Blindagem tributária avançada e alocação orientada por dados
-            quantitativos (Wealth & Law).</li>
+          <li><strong>Vertic Marketing</strong> — captação, funis, branding e tráfego (a demanda).</li>
+          <li><strong>Vertic Consultoria</strong> — diagnóstico e mapeamento de processos (descobre o problema).</li>
+          <li><strong>Vertic Tech</strong> — plataformas sob medida e automações (constrói a solução).</li>
+          <li><strong>Vertic Wealth</strong> — planejamento patrimonial e investimentos (protege e multiplica).</li>
         </ul>
+        <p>O <strong>ciano</strong> é reservado exclusivamente para a holding VERTIC; nenhuma vértice o utiliza como
+          assinatura. A <strong>PGR LAW</strong> é o braço jurídico parceiro da Wealth — empresa separada, não uma
+          subsidiária.</p>
+
+        <h3 class="sub">Holding — Variantes de Logo</h3>
+        <p>Quatro formatos disponíveis, cada um com versão escura (Finance Noir) e clara. Use o botão para alternar.</p>
+        <div class="grid-2">
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <img src="../logos/vertic_logo_stacked.svg" class="logo-img-dark" alt="VERTIC stacked">
+              <img src="../logos/vertic_logo_stacked_light.svg" class="logo-img-light" alt="VERTIC stacked">
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Stacked <span class="badge badge-asset">SVG + PNG</span></div>
+              <div class="logo-desc">Lockup vertical. Uso em apresentações e materiais de grande formato.</div>
+            </div>
+          </div>
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <img src="../logos/vertic_logo_horizontal.svg" class="logo-img-dark" alt="VERTIC horizontal">
+              <img src="../logos/vertic_logo_horizontal_light.svg" class="logo-img-light" alt="VERTIC horizontal">
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Horizontal <span class="badge badge-asset">SVG + PNG</span></div>
+              <div class="logo-desc">Lockup horizontal. Uso em banners, assinaturas e cabeçalhos largos.</div>
+            </div>
+          </div>
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <img src="../logos/vertic_logo_header.svg" class="logo-img-dark" alt="VERTIC header">
+              <img src="../logos/vertic_logo_header_light.svg" class="logo-img-light" alt="VERTIC header">
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Header <span class="badge badge-asset">SVG + PNG</span></div>
+              <div class="logo-desc">Lockup compacto para headers de site. Inclui subtítulo de categoria em ciano.</div>
+            </div>
+          </div>
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <img src="../logos/vertic_logo_icon.svg" class="logo-img-dark" alt="VERTIC icon" style="max-height:80px;">
+              <img src="../logos/vertic_logo_icon_light.svg" class="logo-img-light" alt="VERTIC icon" style="max-height:80px;">
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Icon / Favicon <span class="badge badge-asset">SVG + PNG</span></div>
+              <div class="logo-desc">Mark A isolado. Uso em favicon, avatar e contextos de espaço mínimo.</div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <!-- Section 2: Estética Noir -->
+      <!-- 02: Estética Noir -->
       <section id="noir" class="panel">
         <span class="section-tag">02 // ESTRUTURA VISUAL</span>
-        <h2>A Estética Finance Noir & Depth UI</h2>
-        <p>A identidade de marca foi concebida para afastar-se do visual corporativo comum e aproximar-se de softwares
-          técnicos de alta performance. O conceito visual se apoia em planos de fundo pretos profundos, layouts
-          divididos por bordas finas e micro-interações simétricas.</p>
-        <p>No website, aplicamos o conceito dinâmico <strong>"The Shift"</strong>: quando a navegação sai das frentes
-          técnicas/operacionais e entra na vertical sucessória de Wealth, a interface muda de forma coordenada e fluida
-          para um tema claro minimalista com acentos em dourado champanhe, simulando o status de prestígio,
-          transparência e blindagem alcançados pelo cliente.</p>
+        <h2>A Estética Finance Noir &amp; Depth UI</h2>
+        <p>A identidade afasta-se do visual corporativo comum e aproxima-se de softwares técnicos de alta performance:
+          planos de fundo pretos-azulados profundos, layouts divididos por bordas finas de micro-opacidade,
+          micro-interações simétricas e vazamentos sutis de luz radial (radial glow).</p>
+        <p>Sobre essa base escura, cada vértice projeta sua cor-assinatura. Duas vértices (Marketing e Wealth) operam em
+          <strong>tema claro</strong> e usam a transição <em>The Shift</em> (seção 07) para dialogar com o Noir da
+          holding.</p>
       </section>
 
-      <!-- Section 3: Colors -->
+      <!-- 03: Colors -->
       <section id="colors" class="panel">
-        <span class="section-tag">03 // PALETA CROMÁTICA</span>
-        <h2>Cores Oficiais</h2>
-        <p>A paleta cromática é dividida entre os tons do tema escuro de engenharia e os tons de prestígio do tema
-          sucessório de riqueza.</p>
+        <span class="section-tag">03 // PALETA E TOKENS</span>
+        <h2>Cores &amp; Tokens</h2>
+        <p>A paleta se divide em base Finance Noir, os acentos da holding (ciano e dourado, que variam conforme o fundo)
+          e as cores-assinatura das vértices.</p>
 
+        <h3 class="sub">Base Finance Noir</h3>
         <div class="swatches">
           <div class="swatch">
             <div class="swatch-color" style="background-color: #04070c;"></div>
             <div class="swatch-info">
               <div class="swatch-name">Obsidian Black</div>
               <div class="swatch-hex">#04070c</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #71717a;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Slate Gray</div>
-              <div class="swatch-hex">#71717a</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #06b6d4;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Neon Cyan</div>
-              <div class="swatch-hex">#06b6d4</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #e4e4e7;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Zinc Light</div>
-              <div class="swatch-hex">#e4e4e7</div>
+              <div class="swatch-use">Fundo / tema escuro</div>
             </div>
           </div>
           <div class="swatch">
@@ -601,6 +741,101 @@
             <div class="swatch-info">
               <div class="swatch-name">Obsidian Light</div>
               <div class="swatch-hex">#f8fafc</div>
+              <div class="swatch-use">Fundo / tema claro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #71717a;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Slate Gray</div>
+              <div class="swatch-hex">#71717a</div>
+              <div class="swatch-use">Haste V-Node / texto sec.</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #e4e4e7;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Zinc Light</div>
+              <div class="swatch-hex">#e4e4e7</div>
+              <div class="swatch-use">Texto / divisórias</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub">Ciano — depende do fundo (holding)</h3>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #06b6d4;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Neon Cyan</div>
+              <div class="swatch-hex">#06b6d4</div>
+              <div class="swatch-use">Canônico / tema escuro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #0e7490;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Deep Cyan</div>
+              <div class="swatch-hex">#0e7490</div>
+              <div class="swatch-use">Ciano em fundo claro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #00f0ff;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Pure Neon</div>
+              <div class="swatch-hex">#00f0ff</div>
+              <div class="swatch-use">Só FX/glow (escuro)</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub">Dourado — depende do fundo (Wealth)</h3>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #B89454;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Champagne Gold</div>
+              <div class="swatch-hex">#B89454</div>
+              <div class="swatch-use">Tema claro (Wealth)</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #E5C158;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Luxury Gold</div>
+              <div class="swatch-hex">#E5C158</div>
+              <div class="swatch-use">Acento em tema escuro</div>
+            </div>
+          </div>
+        </div>
+        <p class="note">// Regra: fundo claro exige metal mais escuro; fundo escuro exige metal mais claro. Vale para
+          ciano e dourado.</p>
+
+        <h3 class="sub">Cores-assinatura das vértices</h3>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #a855f7;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Creative Purple</div>
+              <div class="swatch-hex">#a855f7</div>
+              <div class="swatch-use">Marketing</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #3b82f6;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Trust Blue</div>
+              <div class="swatch-hex">#3b82f6</div>
+              <div class="swatch-use">Consultoria</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #f97316;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Robotics Orange</div>
+              <div class="swatch-hex">#f97316</div>
+              <div class="swatch-use">Tech</div>
             </div>
           </div>
           <div class="swatch">
@@ -608,577 +843,309 @@
             <div class="swatch-info">
               <div class="swatch-name">Champagne Gold</div>
               <div class="swatch-hex">#B89454</div>
+              <div class="swatch-use">Wealth</div>
             </div>
           </div>
-        </div>
-
-        <h3
-          style="font-size: 16px; font-weight: 700; margin-top: 24px; margin-bottom: 12px; color: var(--text-primary); font-family: var(--font-sans);">
-          Cores das Subsidiárias (Grupo)</h3>
-        <p>Tons cromáticos de suporte que definem e diferenciam a identidade de cada vertical especializada do
-          ecossistema.</p>
-        <div class="swatches">
-          <div class="swatch">
+          <div class="swatch" style="opacity: 0.55;">
             <div class="swatch-color" style="background-color: #f43f5e;"></div>
             <div class="swatch-info">
-              <div class="swatch-name">Coral Red (Fotografia)</div>
+              <div class="swatch-name">Coral Red</div>
               <div class="swatch-hex">#f43f5e</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #3b82f6;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Trust Blue (Consultoria)</div>
-              <div class="swatch-hex">#3b82f6</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #a855f7;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Creative Purple (Marketing)</div>
-              <div class="swatch-hex">#a855f7</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #f97316;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Robotics Orange (Automações)</div>
-              <div class="swatch-hex">#f97316</div>
+              <div class="swatch-use">Aposentado / terciário</div>
             </div>
           </div>
         </div>
+        <p class="note">// Coral era a antiga "Vertic Fotografia". Fotografia virou capability de produção dentro da
+          Marketing; coral permanece só como acento terciário eventual.</p>
+
+        <h3 class="sub">Tema Claro — texto &amp; borda (Marketing e Wealth)</h3>
+        <p>Marketing e Wealth operam sobre fundo <code>#f8fafc</code>. Os tokens Finance Noir são substituídos pelos seguintes no tema claro:</p>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #04070c;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Text Dark</div>
+              <div class="swatch-hex">#04070c</div>
+              <div class="swatch-use">Texto primário / claro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #3f3f46;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Text Dark Sec</div>
+              <div class="swatch-hex">#3f3f46</div>
+              <div class="swatch-use">Texto secundário / claro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #71717a;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Slate Gray</div>
+              <div class="swatch-hex">#71717a</div>
+              <div class="swatch-use">Texto muted / claro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: #e4e4e7; border: 1px solid rgba(0,0,0,0.08);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Border Light</div>
+              <div class="swatch-hex">#e4e4e7</div>
+              <div class="swatch-use">Divisórias / tema claro</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="sub">Tema Claro — acentos de vértice</h3>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: rgba(168,85,247,0.12); border: 1px solid rgba(168,85,247,0.25);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Marketing Border</div>
+              <div class="swatch-hex">rgba(168,85,247,.12)</div>
+              <div class="swatch-use">Borda Marketing / claro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: rgba(168,85,247,0.06); border: 1px solid rgba(168,85,247,0.15);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Marketing Glow</div>
+              <div class="swatch-hex">rgba(168,85,247,.06)</div>
+              <div class="swatch-use">Sombra/glow Marketing</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: rgba(184,148,84,0.15); border: 1px solid rgba(184,148,84,0.30);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Wealth Border</div>
+              <div class="swatch-hex">rgba(184,148,84,.15)</div>
+              <div class="swatch-use">Borda Wealth / claro</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background-color: rgba(184,148,84,0.06); border: 1px solid rgba(184,148,84,0.20);"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Wealth Glow</div>
+              <div class="swatch-hex">rgba(184,148,84,.06)</div>
+              <div class="swatch-use">Sombra/glow Wealth</div>
+            </div>
+          </div>
+        </div>
+        <p class="note">// Pure Neon (#00f0ff) e Luxury Gold (#E5C158) não se aplicam ao tema claro — ambos exigem fundo escuro para contraste adequado.</p>
       </section>
 
-      <!-- Section 4: Typography -->
+      <!-- 04: Typography -->
       <section id="typography" class="panel">
-        <span class="section-tag">04 // TIPOGRAFIA E ARRANJOS</span>
-        <h2>Tipografia Complementar</h2>
-        <p>A força institucional e a precisão matemática são representadas pela união de duas fontes estruturadas:</p>
+        <span class="section-tag">04 // TIPOGRAFIA</span>
+        <h2>Par Tipográfico</h2>
+        <p>Força institucional e precisão técnica representadas pela união de duas fontes estruturadas:</p>
 
         <div class="typo-display">
           <div class="typo-specimen"
             style="font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.05em;">VERTIC SYSTEM</div>
-          <div class="typo-meta">INTER // PESOS: BOLD, EXTRABOLD // APLICAÇÃO: TÍTULOS E MARCA PRINCIPAL</div>
+          <div class="typo-meta">INTER // PESOS: BOLD, EXTRABOLD // TRACKING -0.05em // TÍTULOS E MARCA</div>
         </div>
 
         <div class="typo-display">
           <div class="typo-specimen"
             style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 22px; letter-spacing: 0.25em;">
-            CORE_ENGINE_V1.0</div>
-          <div class="typo-meta">JETBRAINS MONO // PESOS: REGULAR // APLICAÇÃO: SUBTÍTULOS, TAGS, NÚMEROS E TECH DATA
+            CORE_ENGINE_V2.0</div>
+          <div class="typo-meta">JETBRAINS MONO // REGULAR // TRACKING 0.25em // SUBTÍTULOS, TAGS, NÚMEROS, TECH DATA
           </div>
         </div>
       </section>
 
-      <!-- Section 5: Official Logos -->
-      <section id="logos" class="panel">
-        <span class="section-tag">05 // ARQUIVOS VETORIAIS E UPSCALADOS</span>
-        <h2>Variantes do Logotipo Principal</h2>
-        <p>Estes são os logotipos oficiais. Cada variante está disponível nas cores padrão para fundos escuros (Dark) e
-          adaptada para fundos claros (Light). Todas as imagens PNG contêm fundo transparente e resolução UHD (600 DPI).
-        </p>
+      <!-- 05: Symbols -->
+      <section id="symbols" class="panel">
+        <span class="section-tag">05 // GEOMETRIA OFICIAL</span>
+        <h2>Os Dois Símbolos V-Node</h2>
+        <p>Existem <strong>dois marks distintos</strong>, com papéis diferentes. Geometria validada a partir do código
+          real de produção (viewBox <code>0 0 100 100</code>). A descrição antiga ("inclinação 2, nó em 60,80, raio 9")
+          estava incorreta e foi descartada.</p>
 
-        <div class="grid-2">
-          <!-- Card 1: Stacked Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_stacked.svg" alt="Vertic Stacked Logo" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Stacked Version <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Logo empilhado padrão da holding. Ideal para cartões de visita e caixas de
-                assinatura escuros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_stacked.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_stacked.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
+        <h3 class="sub">Mark A — V-Node Icon (logotipo / lockup)</h3>
+        <p>V único de traço grosso. Usado em logos, headers, favicons e nos lockups de todas as vértices. Haste sempre
+          Slate Gray; nó na cor da vértice.</p>
+        <div class="symbol-stage">
+          <div class="symbol-box">
+            <svg width="110" height="110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 25 L50 75 L80 25" stroke="#71717a" stroke-width="8" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <circle cx="50" cy="75" r="10" fill="#06b6d4" />
+            </svg>
           </div>
-
-          <!-- Card 2: Stacked Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_stacked_light.svg" alt="Vertic Stacked Logo Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Stacked Version <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste do logo empilhado adaptada para fundos claros e documentos
-                em papel.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_stacked_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_stacked_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 3: Horizontal Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_horizontal.svg" alt="Vertic Horizontal Logo" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Horizontal Logo <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Logo em linha única. Ideal para assinaturas de e-mail e cabeçalhos escuros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_horizontal.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_horizontal.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 4: Horizontal Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_horizontal_light.svg" alt="Vertic Horizontal Logo Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Horizontal Logo <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste do logo em linha única adaptada para cabeçalhos claros e
-                papel timbrado.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_horizontal_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_horizontal_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 5: Header Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_header.svg" alt="Vertic Header Logo" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Header Logo <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Versão de menu superior com identificador da proposta abaixo da marca principal.
-              </div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_header.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_header.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 6: Header Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_header_light.svg" alt="Vertic Header Logo Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Header Logo <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão de menu superior adaptada para barra de navegação de contraste claro.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_header_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_header_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 7: Icon Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_icon.svg" alt="Vertic Icon" style="width: 70px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Icon Only <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Apenas o símbolo V-Node. Ideal para favicon de websites, perfis de redes sociais e
-                rodapés.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_icon.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_icon.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 8: Icon Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_icon_light.svg" alt="Vertic Icon Light" style="width: 70px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Icon Only <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste do símbolo V-Node para aplicação em fundos claros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_icon_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_icon_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
+          <div class="codeblock">&lt;path d=<span class="c">"M20 25 L50 75 L80 25"</span>
+      stroke-width=<span class="c">"8"</span> stroke-linecap=<span class="c">"round"</span>/&gt;
+&lt;circle cx=<span class="c">"50"</span> cy=<span class="c">"75"</span> r=<span class="c">"10"</span>/&gt;
+<span class="c">/* haste: #71717a · nó: cor da vértice */</span></div>
         </div>
-      </section>
 
-      <!-- Section 6: Special Logos -->
-      <section id="special" class="panel">
-        <span class="section-tag">06 // ELEMENTOS GEOMÉTRICOS & FLUXO</span>
-        <h2>Versões Especiais (Preloader & Marca d'Água)</h2>
-        <p>Abaixo estão as variantes gráficas complexas baseadas no **Triple V-Node** (três linhas em V convergentes no
-          vértice inferior com o nó circular luminoso).</p>
-
-        <div class="grid-2">
-          <!-- preloader dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_triple_v.svg" alt="Triple V Icon" style="width: 80px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Preloader Symbol <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Ícone de carregamento padrão da holding (Branco / Ciano / Branco).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_triple_v.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_triple_v.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
+        <h3 class="sub">Mark B — Triple V-Node (sistema / decorativo)</h3>
+        <p>Três Vs aninhados (não-paralelos: inclinações 1.62 / 1.83 / 2.25, afunilando para dentro). Usado em
+          preloader, loading screen e watermark do hero. O nó fica no vértice do V <strong>médio</strong>.</p>
+        <div class="symbol-stage">
+          <div class="symbol-box">
+            <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20 L50 85 L90 20" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M20 20 L50 75 L80 20" stroke="#06b6d4" stroke-width="1.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M30 20 L50 65 L70 20" stroke="#ffffff" stroke-width="1" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <circle cx="50" cy="75" r="4" fill="#06b6d4" />
+            </svg>
           </div>
-
-          <!-- preloader light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_triple_v_light.svg" alt="Triple V Icon Light" style="width: 80px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Preloader Symbol <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Ícone de carregamento adaptado para interfaces claras (Obsidian / Ciano).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_triple_v_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_triple_v_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- loading screen dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_loading.svg" alt="Loading Screen" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Loading Screen Full <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Assinatura de carregamento completa com a legenda monospace "INICIALIZANDO...".
-              </div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_loading.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_loading.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- loading screen light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_loading_light.svg" alt="Loading Screen Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Loading Screen Full <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Assinatura de carregamento para fundos claros com legenda cinza-escura.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_loading_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_loading_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- watermark dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_watermark_hero.svg" alt="Watermark Hero" style="width: 80px;" />
-            </div>
-            <div class="glow-top-left"
-              style="background: radial-gradient(circle, rgba(24, 24, 27, 0.4) 0%, transparent 70%);"></div>
-            <div class="logo-details">
-              <div class="logo-title">Hero Watermark <span class="badge badge-special">WATERMARK</span></div>
-              <div class="logo-desc">Marca d'água de alta escala para o Hero da página. A linha externa é
-                tracejada/eixos.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_watermark_hero.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_watermark_hero.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- watermark light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_watermark_hero_light.svg" alt="Watermark Hero Light" style="width: 80px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Hero Watermark <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Marca d'água de alta escala adaptada para o background de seções claras.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_watermark_hero_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_watermark_hero_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
+          <div class="codeblock">&lt;path d=<span class="c">"M10 20 L50 85 L90 20"</span> stroke-width=<span class="c">"2"</span>/&gt;   <span class="c">// externo</span>
+&lt;path d=<span class="c">"M20 20 L50 75 L80 20"</span> stroke-width=<span class="c">"1.5"</span>/&gt; <span class="c">// médio (acento)</span>
+&lt;path d=<span class="c">"M30 20 L50 65 L70 20"</span> stroke-width=<span class="c">"1"</span>/&gt;   <span class="c">// interno</span>
+&lt;circle cx=<span class="c">"50"</span> cy=<span class="c">"75"</span> r=<span class="c">"4"</span>/&gt;      <span class="c">// nó no vértice do médio</span></div>
         </div>
-      </section>
-
-      <!-- Section 7: Group Companies -->
-      <section id="group" class="panel shift-banner">
-        <span class="section-tag">07 // SUBSIDIÁRIAS DA HOLDING</span>
-        <h2>Empresas e Vértices do Grupo</h2>
-        <p>A VERTIC se ramifica em empresas de atuação especializada no mercado, herdando a estrutura do logotipo
-          institucional e utilizando cores exclusivas como assinatura para cada vertical de negócio. Disponíveis em
-          versões para fundos escuros (Dark) e claros (Light).</p>
-
-        <div class="grid-2">
-          <!-- fotografia dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_fotografia.svg" alt="Vertic Fotografia" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Fotografia <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Fotografia corporativa. Nó Coral Vermelho (#f43f5e), representando o frame de
-                gravação.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_fotografia.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_fotografia.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- fotografia light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_fotografia_light.svg" alt="Vertic Fotografia Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Fotografia <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Fotografia para aplicação em papéis e fundos
-                claros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_fotografia_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_fotografia_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- consultoria dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_consultoria.svg" alt="Vertic Consultoria" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Consultoria <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Auditoria e Mapeamento de Processos corporativos. Nó Azul Estratégico (#3b82f6).
-              </div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_consultoria.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_consultoria.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- consultoria light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_consultoria_light.svg" alt="Vertic Consultoria Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Consultoria <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Consultoria para relatórios impressos em fundo
-                branco.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_consultoria_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_consultoria_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- marketing dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_marketing.svg" alt="Vertic Marketing" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Marketing <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Posicionamento digital, funis de alta renda e copy. Nó Roxo Criativo (#a855f7).
-              </div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_marketing.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_marketing.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- marketing light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_marketing_light.svg" alt="Vertic Marketing Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Marketing <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Marketing para peças gráficas de fundo claro.
-              </div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_marketing_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_marketing_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- automacoes dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_logo_automacoes.svg" alt="Vertic Automações" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Automações <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Integrações de sistemas e assistentes baseados em IAs. Nó Laranja Robótico
-                (#f97316).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_automacoes.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_automacoes.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- automacoes light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="../logos/vertic_logo_automacoes_light.svg" alt="Vertic Automações Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Automações <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Automações para fundos e layouts claros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_logo_automacoes_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_logo_automacoes_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 8: Alternate Proposals -->
-      <section id="proposals" class="panel">
-        <span class="section-tag">08 // ESTUDOS DE MARCA</span>
-        <h2>Propostas Criativas e Aplicações</h2>
-        <p>Abaixo estão as 5 propostas de variações estruturadas para diferentes verticais da holding e canais de
-          comunicação digital.</p>
-
-        <div class="grid-2">
-          <!-- Proposal 1 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_proposal_1_neon_cyan.svg" alt="Proposal 1: Neon Cyan" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 1 // Neon Cyan Tech</div>
-              <div class="logo-desc">Paleta de tecnologia focada em ambiente web escuro, utilizando ciano neon (#00f0ff)
-                como luz focal.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_proposal_1_neon_cyan.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_proposal_1_neon_cyan.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 2 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_proposal_2_gold.svg" alt="Proposal 2: Luxury Gold" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 2 // Luxury Gold & Obsidian</div>
-              <div class="logo-desc">Paleta clássica premium dourada (#E5C158). Transmite alto valor, governança e
-                solidez.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_proposal_2_gold.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_proposal_2_gold.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 3 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_proposal_3_royal_blue.svg" alt="Proposal 3: SaaS Blue" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 3 // Corporate Royal Blue</div>
-              <div class="logo-desc">Layout adaptado para fundos claros institucionais e interfaces SaaS tradicionais.
-              </div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_proposal_3_royal_blue.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_proposal_3_royal_blue.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 4 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_proposal_4_crimson.svg" alt="Proposal 4: Cyber Crimson" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 4 // Cyber Crimson Analytics</div>
-              <div class="logo-desc">Tema focado em alta energia, velocidade e performance de análise. Detalhes em
-                vermelho carmesim.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_proposal_4_crimson.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_proposal_4_crimson.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 5 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="../logos/vertic_proposal_5_emerald.svg" alt="Proposal 5: Emerald Mint" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 5 // Emerald Mint ESG</div>
-              <div class="logo-desc">Paleta verde-esmeralda (#10b981). Representa crescimento orgânico estruturado,
-                biosoluções ou ESG.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="../logos/vertic_proposal_5_emerald.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="../logos/vertic_proposal_5_emerald.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 9: Brand Rules -->
-      <section id="rules" class="panel warning-panel">
-        <span class="section-tag" style="color: #ef4444;">09 // REGRAS E BOAS PRÁTICAS</span>
-        <h2 style="color: #ef4444;">O que NÃO deve ser feito</h2>
-        <p>Para preservar o valor da marca VERTIC, atente-se às seguintes restrições de uso:</p>
-        <ul>
-          <li><strong>Não distorça ou achate o logotipo:</strong> A proporção de escala de largura e altura deve ser
-            mantida travada (aspect-ratio).</li>
-          <li><strong>Não mude a proporção do V-Node:</strong> O alinhamento e a distância entre o ícone e o início da
-            tipografia deve ser mantida fiel às variantes especificadas.</li>
-          <li><strong>Não utilize fundos de baixo contraste:</strong> Garanta sempre contraste absoluto. Ao utilizar
-            variantes brancas/claras, dê preferência a backgrounds escuros e limpos, ou utilize as variantes escuras
-            para layouts claros.</li>
+        <ul style="margin-top: 16px;">
+          <li><strong>Preloader (escuro):</strong> externo branco, médio ciano, interno branco, nó ciano. Anima por
+            traços desenhando + nó crescendo.</li>
+          <li><strong>Watermark hero (escuro):</strong> externo branco tracejado em baixa opacidade, médio e interno
+            brancos, nó ciano.</li>
+          <li><strong>Versão clara:</strong> hastes navy <code>#1e293b</code>, médio e nó em Deep Cyan
+            <code>#0e7490</code>.</li>
         </ul>
+      </section>
+
+      <!-- 06: Vertices -->
+      <section id="vertices" class="panel vertices-banner">
+        <span class="section-tag" style="color: var(--accent-gold);">06 // AS 4 VÉRTICES</span>
+        <h2>As Vértices do Grupo</h2>
+        <p>Cada vértice usa o Mark A com o nó na sua cor-assinatura. Lockups renderizados ao vivo em SVG inline — a
+          troca de cor é feita por CSS, exatamente como será no site. Use o botão para conferir em fundo claro.</p>
+
+        <div class="grid-2">
+          <!-- Marketing -->
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <img src="../logos/vertic_logo_marketing.svg" class="logo-img-dark" alt="Vertic Marketing">
+              <img src="../logos/vertic_logo_marketing_light.svg" class="logo-img-light" alt="Vertic Marketing">
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Vertic Marketing <span class="badge badge-asset">SVG + PNG</span></div>
+              <div class="logo-desc">Captação, funis, branding e tráfego. Nó Creative Purple <code>#a855f7</code>. Tema
+                base claro. Fotografia entra aqui como capability.</div>
+            </div>
+          </div>
+
+          <!-- Consultoria -->
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <img src="../logos/vertic_logo_consultoria.svg" class="logo-img-dark" alt="Vertic Consultoria">
+              <img src="../logos/vertic_logo_consultoria_light.svg" class="logo-img-light" alt="Vertic Consultoria">
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Vertic Consultoria <span class="badge badge-asset">SVG + PNG</span></div>
+              <div class="logo-desc">Diagnóstico, mapeamento de processos, otimização de margens e governança. Nó Trust
+                Blue <code>#3b82f6</code>. Tema escuro.</div>
+            </div>
+          </div>
+
+          <!-- Tech -->
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <div class="lockup">
+                <svg class="lockup-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 25 L50 75 L80 25" stroke="#71717a" stroke-width="8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <circle cx="50" cy="75" r="10" fill="#f97316" />
+                </svg>
+                <div class="lockup-text">
+                  <span class="lockup-brand">VERTIC</span>
+                  <span class="lockup-sub" style="color:#f97316;">TECH</span>
+                </div>
+              </div>
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Vertic Tech <span class="badge badge-pending">ASSET PENDENTE</span></div>
+              <div class="logo-desc">Plataformas sob medida, automações e engenharia de software (ex.: Vertic OS). Nó
+                Robotics Orange <code>#f97316</code>. Tema escuro.</div>
+            </div>
+          </div>
+
+          <!-- Wealth -->
+          <div class="logo-card">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <div class="lockup">
+                <svg class="lockup-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 25 L50 75 L80 25" stroke="#71717a" stroke-width="8" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                  <circle cx="50" cy="75" r="10" fill="#B89454" />
+                </svg>
+                <div class="lockup-text">
+                  <span class="lockup-brand">VERTIC</span>
+                  <span class="lockup-sub" style="color:#B89454;">WEALTH</span>
+                </div>
+              </div>
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Vertic Wealth <span class="badge badge-pending">ASSET PENDENTE</span></div>
+              <div class="logo-desc">Planejamento patrimonial e investimentos. Nó Champagne Gold <code>#B89454</code>.
+                Tema claro. PGR LAW = braço jurídico parceiro.</div>
+            </div>
+          </div>
+
+          <!-- Fotografia (capability) -->
+          <div class="logo-card" style="opacity: 0.7;">
+            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
+            <div class="logo-preview">
+              <img src="../logos/vertic_logo_fotografia.svg" class="logo-img-dark" alt="Vertic Fotografia">
+              <img src="../logos/vertic_logo_fotografia_light.svg" class="logo-img-light" alt="Vertic Fotografia">
+            </div>
+            <div class="logo-details">
+              <div class="logo-title">Fotografia <span class="badge badge-cap">CAPABILITY</span></div>
+              <div class="logo-desc">Não é mais vértice. Produção audiovisual/imagem corporativa que alimenta a
+                Marketing. Mantida aqui só por referência histórica.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 07: The Shift -->
+      <section id="shift" class="panel">
+        <span class="section-tag">07 // TRANSIÇÕES DE TEMA</span>
+        <h2>The Shift</h2>
+        <p>Conceito-guarda-chuva com dois membros direcionalmente opostos. Wealth ascende para a luz; Marketing desce
+          para a sombra — mesma engine, vetores contrários.</p>
+
+        <div class="grid-2" style="grid-template-columns: 1fr;">
+          <div class="shift-card">
+            <span class="shift-name" style="color: var(--accent-gold);">The Ascension</span>
+            <div class="shift-bar shift-ascension"></div>
+            <p style="margin-bottom: 0;"><strong>Wealth.</strong> Escuro/ciano → claro/dourado. O cliente sobe ao
+              status de patrimônio protegido. Gatilho: entrada na vértice Wealth.</p>
+          </div>
+          <div class="shift-card">
+            <span class="shift-name" style="color: var(--v-marketing);">The Dark Choice</span>
+            <div class="shift-bar shift-darkchoice"></div>
+            <p style="margin-bottom: 0;"><strong>Marketing.</strong> Claro/roxo → escuro Finance Noir. A página mergulha
+              no tom rigoroso de negócios para o fechamento. Gatilho: fim da Fase 3 da landing.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08: Rules -->
+      <section id="rules" class="panel warning-panel">
+        <span class="section-tag" style="color: #ef4444;">08 // REGRAS E BOAS PRÁTICAS</span>
+        <h2 style="color: #ef4444;">O que NÃO deve ser feito</h2>
+        <ul>
+          <li><strong>Não use ciano como cor de vértice:</strong> o ciano é exclusivo da holding VERTIC.</li>
+          <li><strong>Não troque a haste do V-Node de cor:</strong> a haste é sempre Slate Gray
+            <code>#71717a</code>; só o nó muda de cor.</li>
+          <li><strong>Não confunda os dois marks:</strong> Mark A (V único) para logotipos; Mark B (triplo) só para
+            preloader, loading e watermark.</li>
+          <li><strong>Não use o dourado claro em fundo claro</strong> (nem o ciano escuro em fundo escuro): respeite a
+            regra de contraste metal-fundo.</li>
+          <li><strong>Não distorça nem achate</strong> o logotipo; mantenha o aspect-ratio travado.</li>
+        </ul>
+        <p class="note">// Estudos de cor arquivados: as 5 propostas exploratórias (Neon Cyan, Luxury Gold, Royal Blue,
+          Crimson, Emerald) foram superadas pela arquitetura B e não devem ser usadas como marca.</p>
       </section>
     </main>
   </div>
@@ -1192,12 +1159,10 @@
       let current = '';
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= (sectionTop - 200)) {
+        if (window.pageYOffset >= (sectionTop - 200)) {
           current = section.getAttribute('id');
         }
       });
-
       navLinks.forEach(a => {
         a.classList.remove('active');
         if (a.getAttribute('href') === '#' + current) {
@@ -1206,15 +1171,11 @@
       });
     });
 
-    // Toggle preview background for SVG transparency check
+    // Toggle preview background for contrast check
     function toggleLight(button) {
       const preview = button.nextElementSibling;
       preview.classList.toggle('light-bg');
-      if (preview.classList.contains('light-bg')) {
-        button.innerText = (button.innerText.includes('LIGHT')) ? 'DARK BG' : 'LIGHT BG';
-      } else {
-        button.innerText = (button.innerText.includes('LIGHT')) ? 'DARK BG' : 'LIGHT BG';
-      }
+      button.innerText = preview.classList.contains('light-bg') ? 'DARK BG' : 'LIGHT BG';
     }
   </script>
 </body>

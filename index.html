@@ -1,1164 +1,1380 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VERTIC // Manual de Identidade Visual</title>
+  <title>Vertic Marketing — Growth de Elite</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
     :root {
-      --bg-absolute: #04070c;
-      --bg-panel: rgba(6, 9, 14, 0.65);
-      --border-color: rgba(63, 63, 70, 0.35);
-      --border-hover: rgba(6, 182, 212, 0.45);
-      --text-primary: #ffffff;
-      --text-secondary: #a1a1aa;
+      --noir: #04070c;
+      --panel: rgba(6,9,14,0.75);
+      --border: rgba(63,63,70,0.45);
+      --border-p: rgba(168,85,247,0.45);
+      --text: #ffffff;
+      --text-sec: #a1a1aa;
       --text-muted: #52525b;
-      --accent-cyan: #06b6d4;
-      --accent-cyan-glow: rgba(6, 182, 212, 0.15);
-      --accent-gold: #B89454;
-      --accent-gold-glow: rgba(184, 148, 84, 0.15);
-      --font-sans: 'Inter', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
+      --purple: #a855f7;
+      --purple-d: #7c3aed;
+      --light: #f8fafc;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border-color) transparent;
-      scroll-behavior: smooth;
+    body { font-family: var(--sans); background: var(--noir); color: var(--text); overflow-x: hidden; }
+
+    #canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    header, section, div.transition-block, footer { position: relative; z-index: 1; }
+
+    /* ── HEADER ── */
+    #hdr {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 24px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all .4s ease;
+    }
+    #hdr.stuck {
+      background: rgba(4,7,12,.92); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border); padding: 14px 64px;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .logo-name { font-weight: 900; font-size: 15px; letter-spacing: -.06em; color: #fff; display: block; line-height: 1; }
+    .logo-sub  { font-family: var(--mono); font-size: 8px; color: var(--purple); letter-spacing: .2em; text-transform: uppercase; margin-top: 2px; display: block; }
+    .nav { display: flex; gap: 36px; }
+    .nav a { font-size: 13px; font-weight: 600; color: var(--text-sec); text-decoration: none; transition: color .2s; }
+    .nav a:hover { color: #fff; }
+
+    .btn-p {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 12px 26px; background: var(--purple); color: #fff;
+      border: none; border-radius: 7px; cursor: pointer; text-decoration: none;
+      display: inline-block; transition: all .25s;
+    }
+    .btn-p:hover { background: var(--purple-d); box-shadow: 0 0 32px rgba(168,85,247,.45); transform: translateY(-1px); }
+
+    .btn-o {
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 12px 26px; background: transparent; color: var(--purple);
+      border: 1px solid rgba(168,85,247,.35); border-radius: 7px;
+      cursor: pointer; text-decoration: none; display: inline-block; transition: all .25s;
+    }
+    .btn-o:hover { border-color: var(--purple); background: rgba(168,85,247,.07); }
+
+    /* ── HERO ── */
+    #hero { min-height: 260vh; background: var(--noir); position: relative; }
+    .hero-sticky {
+      position: sticky; top: 0; height: 100vh;
+      display: flex; align-items: center;
+      padding: 0 64px; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; pointer-events: none; filter: blur(120px);
+    }
+    .blob-1 { width: 700px; height: 700px; background: rgba(168,85,247,.07); top: -200px; right: -150px; }
+    .blob-2 { width: 450px; height: 450px; background: rgba(124,58,237,.05); bottom: -120px; left: 80px; }
+    .grid-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(168,85,247,.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(168,85,247,.03) 1px, transparent 1px);
+      background-size: 48px 48px;
     }
 
-    body {
-      background-color: var(--bg-absolute);
-      color: var(--text-primary);
-      font-family: var(--font-sans);
-      min-height: 100vh;
-      overflow-x: hidden;
-      line-height: 1.6;
-      background-image: 
-        linear-gradient(rgba(6, 182, 212, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(6, 182, 212, 0.02) 1px, transparent 1px);
+    .hero-inner {
+      max-width: 1360px; margin: 0 auto; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; padding-top: 80px;
+    }
+
+    .hero-badge {
+      font-family: var(--mono); font-size: 10px; color: var(--purple);
+      letter-spacing: .2em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border: 1px solid rgba(168,85,247,.25);
+      border-radius: 100px; background: rgba(168,85,247,.06); margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--purple);
+      animation: dot-pulse 2s ease infinite;
+    }
+    @keyframes dot-pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(168,85,247,.5); }
+      50% { box-shadow: 0 0 0 6px rgba(168,85,247,0); }
+    }
+
+    .hero-title {
+      font-size: clamp(52px, 5.5vw, 90px);
+      font-weight: 900; letter-spacing: -.05em; line-height: .96;
+      color: #fff; margin-bottom: 28px;
+    }
+    .hero-title .acc {
+      background: linear-gradient(135deg, #c084fc 0%, #a855f7 45%, #7c3aed 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .hero-sub { font-size: 18px; line-height: 1.72; color: var(--text-sec); max-width: 480px; margin-bottom: 40px; }
+
+    .hero-ctas { display: flex; gap: 14px; margin-bottom: 52px; }
+
+    .proof {
+      display: flex; align-items: center; gap: 20px;
+      padding-top: 28px; border-top: 1px solid var(--border);
+    }
+    .proof-lbl { font-family: var(--mono); font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .15em; flex-shrink: 0; }
+    .proof-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .proof-tag {
+      font-size: 11px; color: var(--text-muted); padding: 4px 10px;
+      border: 1px solid var(--border); border-radius: 100px;
+    }
+
+    /* V-Node visual */
+    .hero-vis { position: relative; display: flex; align-items: center; justify-content: center; width: 540px; height: 520px; }
+    .vwrap { position: absolute; inset: 0; }
+    .vglow {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle at 50% 65%, rgba(168,85,247,.14) 0%, transparent 70%);
+      animation: glow-breathe 4s ease infinite;
+    }
+    @keyframes glow-breathe { 0%,100% { opacity: .7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.06); } }
+
+    .vp { stroke-dasharray: 900; stroke-dashoffset: 900; }
+    .vp.draw { animation: draw-stroke 1.6s cubic-bezier(.4,0,.2,1) forwards; }
+    .vp:nth-child(2).draw { animation-delay: .5s; }
+    .vp:nth-child(3).draw { animation-delay: 1s; }
+    .vn { r: 0; }
+    .vn.grow { animation: grow-node .55s cubic-bezier(.34,1.56,.64,1) 1.65s forwards; }
+    @keyframes draw-stroke { to { stroke-dashoffset: 0; } }
+    @keyframes grow-node { to { r: 13; } }
+
+    /* Floating metrics card */
+    .mcard {
+      position: absolute; bottom: 20px; left: -30px;
+      background: rgba(6,9,14,.9); backdrop-filter: blur(24px);
+      border: 1px solid rgba(168,85,247,.3); border-radius: 14px;
+      padding: 20px 24px; display: flex; gap: 24px;
+      box-shadow: 0 24px 64px rgba(0,0,0,.55), 0 0 40px rgba(168,85,247,.08);
+      animation: float-card 6s ease infinite;
+    }
+    @keyframes float-card { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .mc-item { text-align: center; }
+    .mc-val { font-family: var(--mono); font-size: 20px; font-weight: 700; color: var(--purple); display: block; line-height: 1; }
+    .mc-lbl { font-family: var(--mono); font-size: 8px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .12em; display: block; margin-top: 4px; }
+    .mc-sep { width: 1px; background: var(--border); align-self: stretch; }
+
+    /* scroll hint */
+    .scroll-hint {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px; opacity: .3;
+    }
+    .scroll-line {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--purple), transparent);
+      animation: scroll-anim 2s ease infinite;
+    }
+    @keyframes scroll-anim {
+      0% { transform: scaleY(0); transform-origin: top; }
+      49% { transform: scaleY(1); transform-origin: top; }
+      50% { transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+    .scroll-lbl { font-family: var(--mono); font-size: 8px; color: var(--text-muted); letter-spacing: .2em; text-transform: uppercase; }
+
+    /* ── HOW IT WORKS (light) ── */
+    #how { background: var(--light); color: var(--noir); padding: 120px 64px; }
+    .how-inner { max-width: 1280px; margin: 0 auto; }
+    .kicker { font-family: var(--mono); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--purple); display: inline-block; margin-bottom: 14px; }
+    .s-title { font-size: clamp(36px, 4vw, 58px); font-weight: 900; letter-spacing: -.05em; line-height: 1.04; margin-bottom: 18px; }
+    .s-sub { font-size: 17px; line-height: 1.75; color: #3f3f46; max-width: 540px; margin-bottom: 60px; }
+
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 64px; }
+    .step {
+      background: #fff; border: 1px solid #e4e4e7; padding: 40px 32px;
+      transition: all .3s ease; position: relative;
+    }
+    .step:first-child { border-radius: 14px 0 0 14px; }
+    .step:last-child  { border-radius: 0 14px 14px 0; }
+    .step:hover { border-color: rgba(168,85,247,.4); box-shadow: 0 12px 48px rgba(168,85,247,.09); transform: translateY(-4px); z-index: 2; }
+    .step-num { font-family: var(--mono); font-size: 9px; color: rgba(168,85,247,.5); letter-spacing: .2em; display: block; margin-bottom: 18px; }
+    .step-ico {
+      width: 46px; height: 46px; border: 1px solid #e4e4e7; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+      background: rgba(168,85,247,.04);
+    }
+    .step-title { font-size: 18px; font-weight: 800; letter-spacing: -.03em; color: var(--noir); margin-bottom: 10px; }
+    .step-desc { font-size: 14px; line-height: 1.7; color: #52525b; }
+
+    /* Dashboard showcase */
+    .showcase {
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid #e4e4e7;
+      box-shadow: 0 40px 80px rgba(0,0,0,.1), 0 0 0 1px rgba(0,0,0,.04);
+    }
+    .sc-chrome {
+      background: #f1f5f9; padding: 11px 16px;
+      display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #e4e4e7;
+    }
+    .sc-dots { display: flex; gap: 5px; }
+    .sc-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .sc-url {
+      flex: 1; max-width: 380px; margin: 0 auto;
+      background: #fff; border: 1px solid #e4e4e7; border-radius: 5px;
+      padding: 4px 12px; font-family: var(--mono); font-size: 10px; color: #71717a;
+    }
+    .sc-body {
+      background: var(--noir); padding: 28px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .sc-widget {
+      background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px; padding: 18px;
+    }
+    .sc-k { font-family: var(--mono); font-size: 8px; color: rgba(168,85,247,.6); text-transform: uppercase; letter-spacing: .15em; margin-bottom: 8px; }
+    .sc-v { font-family: var(--mono); font-size: 28px; font-weight: 700; color: var(--purple); display: block; }
+    .sc-l { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+    .sc-bars { display: flex; gap: 3px; align-items: flex-end; height: 40px; margin-top: 12px; }
+    .sc-bar { flex: 1; border-radius: 2px 2px 0 0; }
+
+    /* ── RESULTS (dark) ── */
+    #results { background: var(--noir); padding: 120px 64px; overflow: hidden; position: relative; }
+    #results::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(168,85,247,.025) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(168,85,247,.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .res-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .res-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .res-card {
+      background: rgba(255,255,255,.02); border: 1px solid var(--border);
+      border-radius: 13px; padding: 28px 22px; transition: all .3s;
+    }
+    .res-card:hover { border-color: var(--border-p); background: rgba(168,85,247,.04); }
+    .res-val { font-family: var(--mono); font-size: 42px; font-weight: 700; color: var(--purple); display: block; line-height: 1; letter-spacing: -.02em; }
+    .res-lbl { font-family: var(--mono); font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .14em; display: block; margin-top: 8px; }
+    .res-desc { font-size: 12px; color: var(--text-muted); margin-top: 7px; line-height: 1.6; }
+
+    /* ── DARK CHOICE divider ── */
+    .dc-block {
+      background: var(--noir); padding: 110px 64px;
+      border-top: 1px solid rgba(168,85,247,.12);
+      text-align: center; overflow: hidden; position: relative;
+    }
+    .dc-block::before {
+      content: 'THE DARK CHOICE';
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: clamp(60px, 10vw, 140px);
+      font-weight: 700; letter-spacing: -.04em;
+      color: rgba(168,85,247,.04);
+      pointer-events: none; user-select: none;
+    }
+    .dc-tag { font-family: var(--mono); font-size: 10px; color: rgba(168,85,247,.5); letter-spacing: .3em; text-transform: uppercase; display: block; margin-bottom: 20px; }
+    .dc-title { font-size: clamp(44px, 5.5vw, 80px); font-weight: 900; letter-spacing: -.05em; line-height: 1; color: #fff; margin-bottom: 20px; }
+    .dc-sub { font-size: 18px; color: var(--text-sec); max-width: 520px; margin: 0 auto; line-height: 1.72; }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--noir); padding: 80px 64px 120px; position: relative; overflow: hidden; }
+
+    /* Orbs coloridos — necessários para o glass ter algo para refracionar */
+    .pr-glow { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(120px); z-index: 0; }
+    .pr-glow-1 { width: 500px; height: 500px; background: rgba(124,58,237,.14); top: 62%; left: 4%; transform: translateY(-50%); }
+    .pr-glow-2 { width: 600px; height: 600px; background: rgba(168,85,247,.18); top: 56%; left: 50%; transform: translate(-50%,-50%); }
+    .pr-glow-3 { width: 500px; height: 500px; background: rgba(79,70,229,.12); top: 62%; right: 4%; transform: translateY(-50%); }
+
+    #pricing::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(6,182,212,.015) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(6,182,212,.015) 1px, transparent 1px);
       background-size: 40px 40px;
     }
+    .pr-inner { max-width: 1280px; margin: 0 auto; position: relative; z-index: 1; }
+    .pr-head { text-align: center; margin-bottom: 56px; }
 
-    .glow-top-left {
-      position: absolute;
-      top: -10%;
-      left: -10%;
-      width: 40%;
-      height: 40%;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.06) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+    /* Pain strip */
+    .pain-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 60px; }
+    .pain-card {
+      background: rgba(239,68,68,.04); border: 1px solid rgba(239,68,68,.12);
+      border-radius: 10px; padding: 22px;
     }
+    .pain-code { font-family: var(--mono); font-size: 9px; color: rgba(239,68,68,.65); letter-spacing: .15em; text-transform: uppercase; display: block; margin-bottom: 8px; }
+    .pain-card h4 { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .pain-card p  { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
 
-    .glow-bottom-right {
-      position: absolute;
-      bottom: -10%;
-      right: -10%;
-      width: 50%;
-      height: 50%;
-      background: radial-gradient(circle, rgba(184, 148, 84, 0.04) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
+    /* Pricing cards — Liquid Glass + 3D */
+    .pr-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; perspective: 1400px; padding-top: 20px; }
 
-    .wrapper {
-      display: flex;
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      gap: 40px;
+    .pc {
+      background:
+        linear-gradient(155deg, rgba(4,7,12,.88) 0%, rgba(8,4,22,.85) 55%, rgba(4,7,12,.9) 100%) padding-box,
+        linear-gradient(155deg, rgba(255,255,255,.22) 0%, rgba(168,85,247,.2) 40%, rgba(255,255,255,.08) 100%) border-box;
+      border: 1px solid transparent;
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-radius: 24px; padding: 36px 32px;
+      display: flex; flex-direction: column;
       position: relative;
-      z-index: 1;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: box-shadow .4s ease, transform .6s cubic-bezier(.23,1,.32,1);
+      box-shadow:
+        0 1.5px 0 rgba(255,255,255,.1) inset,
+        0 -1px 0 rgba(0,0,0,.6) inset,
+        0 24px 72px rgba(0,0,0,.65);
     }
 
-    aside {
-      width: 300px;
-      position: sticky;
-      top: 40px;
-      height: calc(100vh - 80px);
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      background: var(--bg-panel);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 24px;
+    /* Specular highlight — faixa de luz no topo do vidro */
+    .pc::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 45%;
+      background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, transparent 100%);
+      border-radius: 24px 24px 0 0; pointer-events: none; z-index: 0;
     }
 
-    .sidebar-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--border-color);
+    /* Textura de grade de pontos */
+    .pc::after {
+      content: '';
+      position: absolute; inset: 0; border-radius: 24px;
+      background-image: radial-gradient(rgba(168,85,247,.1) 1px, transparent 1px);
+      background-size: 22px 22px;
+      background-position: 11px 11px;
+      pointer-events: none; z-index: 0;
     }
 
-    .sidebar-header h1 {
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: -0.05em;
+    /* Content acima dos pseudo-elementos */
+    .pc > * { position: relative; z-index: 1; }
+
+    /* Glare dinâmico (posicionado via JS) */
+    .pc-glare {
+      position: absolute; inset: 0; border-radius: 20px;
+      opacity: 0; pointer-events: none; z-index: 3;
+      transition: opacity .3s ease;
     }
 
-    .sidebar-header .tech-label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      color: var(--accent-cyan);
-      letter-spacing: 0.1em;
+    .pc:hover {
+      box-shadow:
+        0 1.5px 0 rgba(255,255,255,.22) inset,
+        0 -1px 0 rgba(0,0,0,.5) inset,
+        0 32px 80px rgba(0,0,0,.6),
+        0 0 60px rgba(168,85,247,.18);
     }
 
-    nav {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      flex-grow: 1;
-      overflow-y: auto;
+    .pc.feat {
+      background:
+        linear-gradient(155deg, rgba(18,6,40,.88) 0%, rgba(28,8,55,.85) 55%, rgba(18,6,40,.9) 100%) padding-box,
+        linear-gradient(155deg, rgba(168,85,247,.7) 0%, rgba(255,255,255,.3) 40%, rgba(168,85,247,.22) 100%) border-box;
+      box-shadow:
+        0 1.5px 0 rgba(255,255,255,.12) inset,
+        0 -1px 0 rgba(0,0,0,.65) inset,
+        0 0 60px rgba(168,85,247,.22),
+        0 24px 72px rgba(0,0,0,.7);
     }
 
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 10px 14px;
-      border-radius: 6px;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .pc.feat:hover {
+      box-shadow:
+        0 2px 0 rgba(255,255,255,.15) inset,
+        0 -1px 0 rgba(0,0,0,.7) inset,
+        0 0 90px rgba(168,85,247,.32),
+        0 32px 80px rgba(0,0,0,.75);
+    }
+    .feat-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      font-family: var(--mono); font-size: 8px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      padding: 5px 16px; background: var(--purple); color: #fff; border-radius: 100px; white-space: nowrap;
+      box-shadow: 0 0 20px rgba(168,85,247,.5);
+    }
+    .pc.feat { margin-top: 0; }
+    .pc-mod { font-family: var(--mono); font-size: 9px; color: var(--purple); letter-spacing: .2em; text-transform: uppercase; display: block; margin-bottom: 10px; }
+    .pc-name { font-size: 24px; font-weight: 900; letter-spacing: -.04em; color: #fff; margin-bottom: 8px; }
+    .pc-tag  { font-size: 13px; color: #a1a1aa; line-height: 1.6; margin-bottom: 26px; }
+
+    .pc-price { display: flex; align-items: flex-end; gap: 3px; margin-bottom: 4px; }
+    .pc-cur { font-family: var(--mono); font-size: 16px; font-weight: 700; color: var(--text-sec); margin-bottom: 7px; }
+    .pc-val { font-family: var(--mono); font-size: 52px; font-weight: 700; letter-spacing: -.03em; color: #ffffff; line-height: 1; text-shadow: 0 0 40px rgba(168,85,247,.3); }
+    .pc-per { font-family: var(--mono); font-size: 11px; color: #a1a1aa; margin-bottom: 4px; }
+    .pc-note { font-size: 11px; color: #71717a; font-style: italic; margin-bottom: 24px; }
+    .pc-div { height: 1px; background: var(--border); margin-bottom: 22px; }
+
+    .pc-feats { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; flex-grow: 1; }
+    .pc-feats li { font-size: 13px; color: #d4d4d8; display: flex; align-items: flex-start; gap: 9px; line-height: 1.55; }
+    .pc-feats li::before { content: '//'; font-family: var(--mono); font-size: 9px; color: var(--purple); flex-shrink: 0; margin-top: 2px; }
+
+    .pc-cta {
+      display: block; font-family: var(--mono); font-size: 11px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase; padding: 15px;
+      border-radius: 8px; border: 1px solid rgba(168,85,247,.35);
+      background: transparent; color: var(--purple);
+      cursor: pointer; text-align: center; text-decoration: none; transition: all .25s; margin-top: auto;
+    }
+    .pc-cta:hover { background: rgba(168,85,247,.1); border-color: var(--purple); }
+    .feat .pc-cta { background: var(--purple); color: #fff; border-color: var(--purple); }
+    .feat .pc-cta:hover { background: var(--purple-d); box-shadow: 0 0 24px rgba(168,85,247,.35); }
+
+    .pr-foot { text-align: center; margin-top: 40px; font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+    .pr-foot a { color: var(--purple); text-decoration: none; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--noir); border-top: 1px solid var(--border); padding: 32px 64px; display: flex; justify-content: space-between; align-items: center; }
+    .foot-copy { font-family: var(--mono); font-size: 10px; color: var(--text-muted); }
+
+    /* ── MACBOOK MOCKUP ── */
+    #vnode-wrap { position: absolute; inset: 0; will-change: opacity, filter, transform; }
+
+    /* Glitch states (classes aplicadas por JS conforme scroll progress) */
+    #vnode-wrap.gl-low  { animation: vn-gl-l .09s steps(1) infinite; }
+    #vnode-wrap.gl-high { animation: vn-gl-h .055s steps(1) infinite; }
+    #vnode-wrap.gl-exit { opacity: 0; filter: blur(12px); transition: opacity .45s ease, filter .45s ease; pointer-events: none; }
+
+    @keyframes vn-gl-l {
+      0%   { transform: translate(0,0);      clip-path: inset(0 0 0 0);      filter: none; }
+      25%  { transform: translate(-4px,2px); clip-path: inset(18% 0 38% 0);  filter: hue-rotate(60deg) saturate(2.5); }
+      50%  { transform: translate(5px,-3px); clip-path: inset(55% 0 8% 0);   filter: hue-rotate(-50deg); }
+      75%  { transform: translate(-3px,4px); clip-path: inset(28% 0 52% 0);  filter: saturate(3); }
+      100% { transform: translate(0,0);      clip-path: inset(0 0 0 0);      filter: none; }
+    }
+    @keyframes vn-gl-h {
+      0%   { transform: translate(0,0);       clip-path: inset(0 0 0 0);       filter: none; }
+      15%  { transform: translate(-9px,4px);  clip-path: inset(4% 0 62% 0);    filter: hue-rotate(130deg) saturate(6) brightness(1.6); }
+      30%  { transform: translate(9px,-5px);  clip-path: inset(67% 0 4% 0);    filter: hue-rotate(-130deg) saturate(4); }
+      45%  { transform: translate(-6px,7px);  clip-path: inset(33% 0 42% 0);   filter: brightness(2.2) saturate(0); }
+      60%  { transform: translate(7px,-4px);  clip-path: inset(82% 0 1% 0);    filter: hue-rotate(210deg); }
+      75%  { transform: translate(-11px,3px); clip-path: inset(9% 0 77% 0);    filter: saturate(7) brightness(1.9); }
+      100% { transform: translate(0,0);       clip-path: inset(0 0 0 0);       filter: none; }
     }
 
-    nav a:hover, nav a.active {
-      color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.04);
-      border-left: 2px solid var(--accent-cyan);
+    /* MacBook wrapper */
+    #mac-wrap {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transform: translateX(55px) rotateY(-15deg) scale(0.88);
+      /* drop-shadow delegado ao .mac-body para evitar clip do pai */
+    }
+    #mac-wrap.mac-in { pointer-events: auto; }
+
+    /* ── MacBook Pro (modern redesign) ── */
+    .mac-body {
+      width: 460px;
+      filter:
+        drop-shadow(0 0 80px rgba(168,85,247,.14))
+        drop-shadow(0 60px 120px rgba(0,0,0,.95))
+        drop-shadow(0 20px 40px rgba(0,0,0,.7));
     }
 
-    .nav-num {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: var(--text-muted);
-    }
-
-    nav a:hover .nav-num, nav a.active .nav-num {
-      color: var(--accent-cyan);
-    }
-
-    main {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      max-width: 1060px;
-    }
-
-    .panel {
-      background: var(--bg-panel);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 32px;
+    /* Lid — space gray aluminum */
+    .mac-lid {
+      width: 100%;
+      background: linear-gradient(175deg, #424244 0%, #333335 10%, #282829 40%, #1e1e20 100%);
+      border-radius: 14px 14px 2px 2px;
+      padding: 14px 14px 0;
       position: relative;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.12) inset,
+        0 0 0 1.5px rgba(0,0,0,.9),
+        inset 0 2px 0 rgba(255,255,255,.07);
+    }
+    /* Chamfer top edge — aluminum highlight */
+    .mac-lid::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent 2%, rgba(255,255,255,.18) 20%, rgba(255,255,255,.22) 50%, rgba(255,255,255,.18) 80%, transparent 98%);
+      border-radius: 14px 14px 0 0;
+    }
+    /* Subtle Apple logo shadow on lid back */
+    .mac-lid::after {
+      content: '';
+      position: absolute; bottom: -1px; left: 0; right: 0; height: 1px;
+      background: rgba(0,0,0,.9);
+    }
+
+    /* Camera + notch strip */
+    .mac-cam-strip {
+      display: flex; justify-content: center; align-items: center;
+      height: 20px; margin-bottom: 0; position: relative;
+    }
+    .mac-cam {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #3a3a3a, #0a0a0a);
+      box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 0 0 2.5px rgba(0,0,0,.8);
+    }
+    /* Notch — MacBook Pro style */
+    .mac-notch {
+      position: absolute;
+      top: -14px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 20px;
+      background: linear-gradient(180deg, #080a0c 60%, #0d0f12 100%);
+      border-radius: 0 0 12px 12px;
+      z-index: 5;
+    }
+
+    /* Screen panel */
+    .mac-bezel {
+      background: #060810;
+      border-radius: 4px 4px 0 0;
       overflow: hidden;
-      transition: border-color 0.3s ease;
-    }
-
-    .panel:hover {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .section-tag {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent-cyan);
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      margin-bottom: 12px;
-      display: inline-block;
-    }
-
-    h2 {
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.05em;
-      margin-bottom: 20px;
-      color: var(--text-primary);
-    }
-
-    p {
-      color: var(--text-secondary);
-      font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    ul {
-      list-style: none;
-      margin-bottom: 20px;
-    }
-
-    li {
+      aspect-ratio: 16/10;
       position: relative;
-      padding-left: 20px;
-      margin-bottom: 8px;
-      color: var(--text-secondary);
-      font-size: 14px;
+      /* Screen LCD backlight glow */
+      box-shadow: 0 0 0 1px rgba(255,255,255,.04) inset;
+    }
+    /* Glass glare — top reflection */
+    .mac-bezel::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 35%;
+      background: linear-gradient(180deg, rgba(255,255,255,.04) 0%, transparent 100%);
+      z-index: 10; pointer-events: none; border-radius: 4px 4px 0 0;
+    }
+    /* Screen vignette edge */
+    .mac-bezel::after {
+      content: '';
+      position: absolute; inset: 0;
+      box-shadow: inset 0 0 20px rgba(0,0,0,.5);
+      z-index: 10; pointer-events: none;
+    }
+    .mac-screen { position: absolute; inset: 0; overflow: hidden; }
+
+    /* Screen content track — 3 "sites" stacked */
+    .mac-track {
+      width: 100%; display: flex; flex-direction: column; height: 300%;
+      animation: macSlide 20s cubic-bezier(.4,0,.2,1) infinite;
+    }
+    @keyframes macSlide {
+      0%   { transform: translateY(0); }
+      30%  { transform: translateY(0); }
+      37%  { transform: translateY(-33.333%); }
+      63%  { transform: translateY(-33.333%); }
+      70%  { transform: translateY(-66.666%); }
+      93%  { transform: translateY(-66.666%); }
+      100% { transform: translateY(0); }
+    }
+    .mac-site { width: 100%; height: 33.333%; position: relative; overflow: hidden; flex-shrink: 0; }
+
+    /* ── Placeholder Site 1: Finance Noir hero ── */
+    .ms1 { background: #04070c; }
+    .ms1::before {
+      content: ''; position: absolute;
+      width: 55%; height: 80%; top: -20%; right: -5%;
+      background: radial-gradient(circle, rgba(168,85,247,.24) 0%, transparent 70%);
+      filter: blur(28px); border-radius: 50%;
+    }
+    .ms1-nav { height: 18px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; border-bottom: 1px solid rgba(255,255,255,.04); }
+    .ms1-logo { width: 38px; height: 5px; background: rgba(255,255,255,.65); border-radius: 2px; }
+    .ms1-links { display: flex; gap: 7px; }
+    .ms1-link { width: 18px; height: 3px; background: rgba(255,255,255,.14); border-radius: 1px; }
+    .ms1-body { padding: 10px 12px; }
+    .ms1-badge { width: 64px; height: 6px; background: rgba(168,85,247,.3); border: 1px solid rgba(168,85,247,.2); border-radius: 20px; margin-bottom: 8px; }
+    .ms1-h1  { height: 9px; background: rgba(255,255,255,.72); border-radius: 2px; margin-bottom: 5px; }
+    .ms1-h1b { width: 78%; height: 9px; background: rgba(255,255,255,.6); border-radius: 2px; margin-bottom: 4px; }
+    .ms1-h1c { width: 65%; height: 9px; background: linear-gradient(90deg, rgba(168,85,247,.75), rgba(124,58,237,.5)); border-radius: 2px; margin-bottom: 10px; }
+    .ms1-sub  { width: 72%; height: 3px; background: rgba(255,255,255,.18); border-radius: 1px; margin-bottom: 3px; }
+    .ms1-sub2 { width: 56%; height: 3px; background: rgba(255,255,255,.12); border-radius: 1px; margin-bottom: 10px; }
+    .ms1-ctas { display: flex; gap: 6px; }
+    .ms1-cta1 { width: 52px; height: 13px; background: rgba(168,85,247,.85); border-radius: 3px; }
+    .ms1-cta2 { width: 46px; height: 13px; border: 1px solid rgba(168,85,247,.3); border-radius: 3px; }
+    .ms1-vnode {
+      position: absolute; right: 10%; top: 15%;
+      width: 38%; height: 75%; opacity: .15;
+      background: none;
     }
 
-    li::before {
-      content: "//";
-      position: absolute;
-      left: 0;
-      color: var(--accent-cyan);
-      font-family: var(--font-mono);
-      font-size: 12px;
+    /* ── Placeholder Site 2: Dashboard / Cockpit ── */
+    .ms2 { background: #060810; }
+    .ms2::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(168,85,247,.018) 1px, transparent 1px), linear-gradient(90deg, rgba(168,85,247,.018) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    .ms2-nav { height: 17px; display: flex; align-items: center; gap: 7px; padding: 0 10px; background: rgba(255,255,255,.018); border-bottom: 1px solid rgba(255,255,255,.05); }
+    .ms2-logo { width: 28px; height: 5px; background: rgba(168,85,247,.65); border-radius: 2px; }
+    .ms2-dot  { width: 5px; height: 5px; border-radius: 50%; background: rgba(168,85,247,.4); animation: dot-pulse 2s ease infinite; }
+    .ms2-sep  { flex: 1; }
+    .ms2-tag  { width: 40px; height: 5px; background: rgba(255,255,255,.12); border-radius: 2px; }
+    .ms2-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; padding: 6px 8px; }
+    .ms2-card { background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.055); border-radius: 3px; padding: 5px; }
+    .ms2-ck { width: 28px; height: 3px; background: rgba(168,85,247,.45); border-radius: 1px; margin-bottom: 4px; }
+    .ms2-cv { width: 44px; height: 9px; background: rgba(168,85,247,.72); border-radius: 2px; margin-bottom: 3px; }
+    .ms2-cl { width: 36px; height: 3px; background: rgba(255,255,255,.1); border-radius: 1px; }
+    .ms2-card:nth-child(2) .ms2-cv { background: rgba(16,185,129,.72); }
+    .ms2-card:nth-child(2) .ms2-ck { background: rgba(16,185,129,.4); }
+    .ms2-card:nth-child(3) .ms2-cv { background: rgba(59,130,246,.72); }
+    .ms2-card:nth-child(3) .ms2-ck { background: rgba(59,130,246,.4); }
+    .ms2-chart { margin: 0 8px; background: rgba(255,255,255,.015); border: 1px solid rgba(255,255,255,.045); border-radius: 3px; padding: 6px 6px 4px; height: 48px; display: flex; align-items: flex-end; gap: 3px; }
+    .ms2-bar { flex: 1; border-radius: 1px 1px 0 0; }
+    .ms2-bar:nth-child(1) { height: 30%; background: rgba(168,85,247,.3); }
+    .ms2-bar:nth-child(2) { height: 50%; background: rgba(168,85,247,.4); }
+    .ms2-bar:nth-child(3) { height: 40%; background: rgba(168,85,247,.4); }
+    .ms2-bar:nth-child(4) { height: 65%; background: rgba(168,85,247,.55); }
+    .ms2-bar:nth-child(5) { height: 55%; background: rgba(168,85,247,.55); }
+    .ms2-bar:nth-child(6) { height: 80%; background: rgba(168,85,247,.7); }
+    .ms2-bar:nth-child(7) { height: 72%; background: rgba(168,85,247,.7); }
+    .ms2-bar:nth-child(8) { height: 100%; background: rgba(168,85,247,.85); }
+
+    /* ── Placeholder Site 3: Landing Claro ── */
+    .ms3 { background: #f8fafc; }
+    .ms3-nav { height: 17px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px; border-bottom: 1px solid #e4e4e7; background: #fff; }
+    .ms3-logo { width: 36px; height: 5px; background: #1a1a1a; border-radius: 2px; }
+    .ms3-links { display: flex; gap: 7px; }
+    .ms3-link { width: 18px; height: 3px; background: #c4c4c7; border-radius: 1px; }
+    .ms3-hero { padding: 12px 12px 6px; text-align: center; }
+    .ms3-k  { width: 48px; height: 5px; background: rgba(168,85,247,.5); border-radius: 2px; margin: 0 auto 7px; }
+    .ms3-h1 { width: 82%; height: 8px; background: #1a1a1a; border-radius: 2px; margin: 0 auto 4px; }
+    .ms3-h2 { width: 64%; height: 8px; background: #3f3f46; border-radius: 2px; margin: 0 auto 9px; }
+    .ms3-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; padding: 0 6px; }
+    .ms3-card { background: #fff; border: 1px solid #e4e4e7; border-radius: 4px; padding: 5px; }
+    .ms3-ico { width: 12px; height: 12px; background: rgba(168,85,247,.1); border-radius: 2px; margin-bottom: 3px; }
+    .ms3-ct { width: 85%; height: 4px; background: #1a1a1a; border-radius: 1px; margin-bottom: 2px; }
+    .ms3-cd { width: 72%; height: 3px; background: #c4c4c7; border-radius: 1px; margin-bottom: 2px; }
+    .ms3-cd2 { width: 55%; height: 3px; background: #c4c4c7; border-radius: 1px; }
+
+    /* Hinge — thin metal bar */
+    .mac-hinge {
+      width: 96%; margin: 0 auto;
+      height: 5px;
+      background: linear-gradient(180deg,
+        rgba(0,0,0,.9) 0%,
+        #1a1a1c 30%,
+        #2a2a2c 55%,
+        #1a1a1c 80%,
+        rgba(0,0,0,.8) 100%
+      );
+      box-shadow: 0 1px 4px rgba(0,0,0,.8), 0 -1px 0 rgba(255,255,255,.04);
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-      gap: 20px;
-    }
-
-    .logo-card {
-      background: rgba(4, 7, 12, 0.85);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      align-items: center;
+    /* Base — palm rest */
+    .mac-base {
+      width: 106%; margin-left: -3%;
+      background: linear-gradient(180deg, #2e2e30 0%, #252527 25%, #1e1e20 75%, #161618 100%);
+      border-radius: 0 0 12px 12px;
+      padding: 12px 22px 10px;
       position: relative;
-      overflow: hidden;
-      transition: all 0.3s ease;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.07) inset,
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 4px 0 rgba(0,0,0,.5),
+        0 12px 28px rgba(0,0,0,.55),
+        0 24px 48px rgba(0,0,0,.4);
+    }
+    /* Base bottom edge chamfer */
+    .mac-base::after {
+      content: '';
+      position: absolute; bottom: 0; left: 4%; right: 4%; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.06) 30%, rgba(255,255,255,.06) 70%, transparent);
+      border-radius: 0 0 12px 12px;
     }
 
-    .logo-card:hover {
-      border-color: var(--border-hover);
-      box-shadow: 0 0 20px var(--accent-cyan-glow);
+    /* Function key strip */
+    .mac-fn {
+      width: 80%; margin: 0 auto 4px;
+      height: 9px; border-radius: 2px;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(0,0,0,.55) 0, rgba(0,0,0,.55) 2px,
+          rgba(255,255,255,.03) 2px, rgba(255,255,255,.03) 3px,
+          #222224 3px, #222224 16px
+        );
+      opacity: .85;
     }
 
-    .logo-preview {
-      width: 100%;
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
-      background-size: 15px 15px;
-      background-color: #020306;
-      border: 1px solid rgba(255,255,255,0.02);
-      border-radius: 6px;
-      padding: 15px;
-      position: relative;
-      transition: background-color 0.3s ease;
+    /* Main keyboard — individual key look */
+    .mac-keys {
+      width: 80%; margin: 0 auto 5px;
+      height: 62px; border-radius: 2px;
+      background:
+        /* Row separators */
+        repeating-linear-gradient(0deg,
+          rgba(0,0,0,.65) 0, rgba(0,0,0,.65) 2.5px,
+          rgba(255,255,255,.04) 2.5px, rgba(255,255,255,.04) 3.5px,
+          #252527 3.5px, #252527 16.5px
+        ),
+        /* Column separators */
+        repeating-linear-gradient(90deg,
+          rgba(0,0,0,.65) 0, rgba(0,0,0,.65) 2.5px,
+          #252527 2.5px, #252527 26px
+        );
     }
 
-    .light-mode-toggle {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-      font-size: 10px;
-      font-family: var(--font-mono);
-      padding: 4px 8px;
-      border-radius: 4px;
-      cursor: pointer;
-      z-index: 10;
-      transition: all 0.2s ease;
+    /* Trackpad — glass surface */
+    .mac-pad {
+      width: 34%; height: 18px; margin: 0 auto;
+      background: linear-gradient(160deg, #2a2a2c 0%, #1e2020 40%, #1a1c1c 100%);
+      border-radius: 5px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,.06) inset,
+        0 0 0 1px rgba(0,0,0,.5),
+        0 1px 3px rgba(0,0,0,.4);
     }
 
-    .light-mode-toggle:hover {
-      background: var(--text-primary);
-      color: var(--bg-absolute);
-    }
+    /* ── REVEAL ── */
+    .r { opacity: 0; transform: translateY(30px); transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1); }
+    .r.in { opacity: 1; transform: translateY(0); }
 
-    .logo-preview.light-bg {
-      background-color: #f8fafc;
-      background-image: 
-        linear-gradient(rgba(0,0,0,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.02) 1px, transparent 1px);
-    }
-
-    .logo-preview img {
-      max-width: 90%;
-      max-height: 95%;
-      object-fit: contain;
-    }
-
-    .logo-details {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .logo-title {
-      font-size: 15px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .badge {
-      font-family: var(--font-mono);
-      font-size: 8.5px;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-weight: bold;
-    }
-
-    .badge-dark {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-primary);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .badge-light {
-      background: rgba(6, 182, 212, 0.1);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(6, 182, 212, 0.25);
-    }
-
-    .badge-special {
-      background: rgba(184, 148, 84, 0.1);
-      color: var(--accent-gold);
-      border: 1px solid rgba(184, 148, 84, 0.25);
-    }
-
-    .logo-desc {
-      font-size: 12.5px;
-      color: var(--text-secondary);
-      min-height: 38px;
-    }
-
-    .logo-actions {
-      display: flex;
-      width: 100%;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .btn {
-      flex-grow: 1;
-      padding: 8px 12px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: var(--font-mono);
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .btn-svg {
-      background: transparent;
-      border: 1px solid var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
-
-    .btn-svg:hover {
-      background: var(--accent-cyan);
-      color: var(--bg-absolute);
-      box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
-    }
-
-    .btn-png {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-primary);
-    }
-
-    .btn-png:hover {
-      background: var(--text-primary);
-      color: var(--bg-absolute);
-    }
-
-    .swatches {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 16px;
-      margin-top: 15px;
-    }
-
-    .swatch {
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      overflow: hidden;
-      background: rgba(0,0,0,0.25);
-    }
-
-    .swatch-color {
-      height: 80px;
-      width: 100%;
-      transition: transform 0.2s ease;
-    }
-
-    .swatch:hover .swatch-color {
-      transform: scale(1.05);
-    }
-
-    .swatch-info {
-      padding: 12px;
-    }
-
-    .swatch-name {
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .swatch-hex {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--accent-cyan);
-    }
-
-    .typo-display {
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 24px;
-      margin-top: 16px;
-      background: rgba(0,0,0,0.25);
-    }
-
-    .typo-specimen {
-      font-size: 32px;
-      margin-bottom: 8px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      padding-bottom: 12px;
-    }
-
-    .typo-meta {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--text-secondary);
-    }
-
-    .warning-panel {
-      border-left: 4px solid #ef4444;
-      background: rgba(239, 68, 68, 0.03);
-    }
-
-    .shift-banner {
-      background: radial-gradient(circle at right, var(--accent-gold-glow) 0%, transparent 60%);
-      border: 1px solid rgba(184, 148, 84, 0.2);
-    }
-    
-    .shift-banner .section-tag {
-      color: var(--accent-gold);
-    }
-
-    .shift-banner li::before {
-      color: var(--accent-gold);
-    }
-
-    @media (max-width: 980px) {
-      .wrapper {
-        flex-direction: column;
-        padding: 20px;
-      }
-      aside {
-        width: 100%;
-        position: relative;
-        top: 0;
-        height: auto;
-      }
-      .grid-2 {
-        grid-template-columns: 1fr;
-      }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      #hdr, #hdr.stuck { padding: 14px 24px; }
+      .nav { display: none; }
+      .hero-inner, .res-inner { grid-template-columns: 1fr; gap: 48px; }
+      .vwrap { width: 300px; height: 300px; }
+      .mcard { left: 0; right: 0; justify-content: center; bottom: -10px; }
+      #hero, #how, #results, #pricing, .dc-block { padding-left: 24px; padding-right: 24px; }
+      .steps, .sc-body, .pain-strip, .pr-grid, .res-grid { grid-template-columns: 1fr; }
+      .pr-glow { display: none; }
+      footer { flex-direction: column; gap: 12px; padding: 24px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="glow-top-left"></div>
-  <div class="glow-bottom-right"></div>
+<canvas id="canvas"></canvas>
 
-  <div class="wrapper">
-    <!-- Sidebar Navigation -->
-    <aside>
-      <div class="sidebar-header">
-        <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 25L50 75L80 25" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-          <circle cx="50" cy="75" r="10" fill="#06b6d4" />
-        </svg>
-        <div>
-          <h1>VERTIC</h1>
-          <div class="tech-label">BRAND MANUAL v1.2</div>
+<!-- HEADER -->
+<header id="hdr">
+  <a href="#" class="logo">
+    <svg width="30" height="30" viewBox="0 0 100 100" fill="none">
+      <path d="M20 25 L50 75 L80 25" stroke="#71717a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="50" cy="75" r="10" fill="#a855f7"/>
+    </svg>
+    <div>
+      <span class="logo-name">VERTIC</span>
+      <span class="logo-sub">Marketing</span>
+    </div>
+  </a>
+  <nav class="nav">
+    <a href="#how">Como Funciona</a>
+    <a href="#results">Resultados</a>
+    <a href="#pricing">Planos</a>
+  </nav>
+  <a href="#pricing" class="btn-p">Contratar Agora</a>
+</header>
+
+<!-- ════════════════════════════════════════ -->
+<!-- HERO                                     -->
+<!-- ════════════════════════════════════════ -->
+<section id="hero">
+<div class="hero-sticky">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="grid-bg"></div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">// Vertic Marketing System</div>
+      <h1 class="hero-title">
+        A Estética<br>
+        Corporativa<br>
+        que <span class="acc">Multiplica<br>Escala.</span>
+      </h1>
+      <p class="hero-sub">Damos a pequenos negócios locais a infraestrutura visual, a engenharia de dados e a tração digital de grandes multinacionais.</p>
+      <div class="hero-ctas">
+        <a href="#pricing" class="btn-p">Contratar Agora</a>
+        <a href="#how" class="btn-o">Ver Como Funciona</a>
+      </div>
+      <div class="proof">
+        <span class="proof-lbl">Para</span>
+        <div class="proof-tags">
+          <span class="proof-tag">Clínicas médicas</span>
+          <span class="proof-tag">Consultórios</span>
+          <span class="proof-tag">Advogados</span>
+          <span class="proof-tag">Arquitetos</span>
         </div>
       </div>
-      <nav>
-        <a href="#welcome" class="active"><span class="nav-num">01 //</span> Visão Geral</a>
-        <a href="#noir"><span class="nav-num">02 //</span> Estética UI/UX</a>
-        <a href="#colors"><span class="nav-num">03 //</span> Cores</a>
-        <a href="#typography"><span class="nav-num">04 //</span> Tipografia</a>
-        <a href="#logos"><span class="nav-num">05 //</span> Logo Oficial</a>
-        <a href="#special"><span class="nav-num">06 //</span> Versões Especiais</a>
-        <a href="#group"><span class="nav-num">07 //</span> Empresas do Grupo</a>
-        <a href="#proposals"><span class="nav-num">08 //</span> Propostas Alternativas</a>
-        <a href="#rules"><span class="nav-num">09 //</span> Regras de Uso</a>
-      </nav>
-    </aside>
+    </div>
 
-    <!-- Main Content -->
-    <main>
-      <!-- Section 1: Welcome -->
-      <section id="welcome" class="panel">
-        <span class="section-tag">01 // CONCEITO E VISÃO</span>
-        <h2>VERTIC: O Ecossistema Integrado</h2>
-        <p>A <strong>VERTIC</strong> é uma holding institucional e ecossistema integrado estruturado sob o modelo de <em>Full Stack Advisor</em>. Atuamos como o Sistema Operacional definitivo para o empresário de alto valor (HNWIs), unificando três eixos críticos que tradicionalmente operam isolados:</p>
-        <ul>
-          <li><strong>Eficiência Operacional:</strong> Soluções avançadas em tecnologia e escala prática (Tech & Growth).</li>
-          <li><strong>Eficiência Estratégica:</strong> Otimização de processos executivos, cultura e governança corporativa (Advisory).</li>
-          <li><strong>Eficiência Patrimonial:</strong> Blindagem tributária avançada e alocação orientada por dados quantitativos (Wealth & Law).</li>
-        </ul>
-      </section>
+    <div class="hero-vis">
+      <div class="vwrap" id="vnode-wrap">
+        <div class="vglow"></div>
+        <svg width="100%" height="100%" viewBox="0 0 400 400" fill="none">
+          <defs>
+            <radialGradient id="vg" cx="50%" cy="65%" r="50%">
+              <stop offset="0%" stop-color="#a855f7" stop-opacity=".12"/>
+              <stop offset="100%" stop-color="#a855f7" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="200" cy="270" r="190" fill="url(#vg)"/>
+          <!-- externo -->
+          <path class="vp" d="M28 80 L200 348 L372 80"
+            stroke="rgba(168,85,247,.2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- médio / acento -->
+          <path class="vp" d="M74 80 L200 305 L326 80"
+            stroke="#a855f7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- interno -->
+          <path class="vp" d="M120 80 L200 262 L280 80"
+            stroke="rgba(168,85,247,.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- nó com pulso -->
+          <circle class="vn" cx="200" cy="305" fill="#a855f7"/>
+          <circle cx="200" cy="305" r="0" fill="none" stroke="#a855f7" stroke-width="1" id="ring">
+            <animate attributeName="r" values="13;30;13" dur="3s" repeatCount="indefinite" begin="2.2s"/>
+            <animate attributeName="opacity" values="0;.35;0" dur="3s" repeatCount="indefinite" begin="2.2s"/>
+          </circle>
+        </svg>
 
-      <!-- Section 2: Estética Noir -->
-      <section id="noir" class="panel">
-        <span class="section-tag">02 // ESTRUTURA VISUAL</span>
-        <h2>A Estética Finance Noir & Depth UI</h2>
-        <p>A identidade de marca foi concebida para afastar-se do visual corporativo comum e aproximar-se de softwares técnicos de alta performance. O conceito visual se apoia em planos de fundo pretos profundos, layouts divididos por bordas finas e micro-interações simétricas.</p>
-        <p>No website, aplicamos o conceito dinâmico <strong>"The Shift"</strong>: quando a navegação sai das frentes técnicas/operacionais e entra na vertical sucessória de Wealth, a interface muda de forma coordenada e fluida para um tema claro minimalista com acentos em dourado champanhe, simulando o status de prestígio, transparência e blindagem alcançados pelo cliente.</p>
-      </section>
-
-      <!-- Section 3: Colors -->
-      <section id="colors" class="panel">
-        <span class="section-tag">03 // PALETA CROMÁTICA</span>
-        <h2>Cores Oficiais</h2>
-        <p>A paleta cromática é dividida entre os tons do tema escuro de engenharia e os tons de prestígio do tema sucessório de riqueza.</p>
-        
-        <div class="swatches">
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #04070c;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Obsidian Black</div>
-              <div class="swatch-hex">#04070c</div>
-            </div>
+        <div class="mcard">
+          <div class="mc-item">
+            <span class="mc-val">+312%</span>
+            <span class="mc-lbl">Reach</span>
           </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #71717a;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Slate Gray</div>
-              <div class="swatch-hex">#71717a</div>
-            </div>
+          <div class="mc-sep"></div>
+          <div class="mc-item">
+            <span class="mc-val">-28%</span>
+            <span class="mc-lbl">CPA</span>
           </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #06b6d4;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Neon Cyan</div>
-              <div class="swatch-hex">#06b6d4</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #e4e4e7;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Zinc Light</div>
-              <div class="swatch-hex">#e4e4e7</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #f8fafc;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Obsidian Light</div>
-              <div class="swatch-hex">#f8fafc</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #B89454;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Champagne Gold</div>
-              <div class="swatch-hex">#B89454</div>
-            </div>
+          <div class="mc-sep"></div>
+          <div class="mc-item">
+            <span class="mc-val">4.8×</span>
+            <span class="mc-lbl">ROAS</span>
           </div>
         </div>
+      </div>
 
-        <h3 style="font-size: 16px; font-weight: 700; margin-top: 24px; margin-bottom: 12px; color: var(--text-primary); font-family: var(--font-sans);">Cores das Subsidiárias (Grupo)</h3>
-        <p>Tons cromáticos de suporte que definem e diferenciam a identidade de cada vertical especializada do ecossistema.</p>
-        <div class="swatches">
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #f43f5e;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Coral Red (Fotografia)</div>
-              <div class="swatch-hex">#f43f5e</div>
+      <!-- MacBook Pro — dentro de hero-vis, entrada por scroll -->
+      <div id="mac-wrap">
+        <div class="mac-body">
+          <div class="mac-lid">
+            <div class="mac-cam-strip">
+              <div class="mac-notch"></div>
+              <div class="mac-cam"></div>
             </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #3b82f6;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Trust Blue (Consultoria)</div>
-              <div class="swatch-hex">#3b82f6</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #a855f7;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Creative Purple (Marketing)</div>
-              <div class="swatch-hex">#a855f7</div>
-            </div>
-          </div>
-          <div class="swatch">
-            <div class="swatch-color" style="background-color: #f97316;"></div>
-            <div class="swatch-info">
-              <div class="swatch-name">Robotics Orange (Automações)</div>
-              <div class="swatch-hex">#f97316</div>
-            </div>
-          </div>
-        </div>
-      </section>
+            <div class="mac-bezel">
+              <div class="mac-screen">
+                <div class="mac-track">
 
-      <!-- Section 4: Typography -->
-      <section id="typography" class="panel">
-        <span class="section-tag">04 // TIPOGRAFIA E ARRANJOS</span>
-        <h2>Tipografia Complementar</h2>
-        <p>A força institucional e a precisão matemática são representadas pela união de duas fontes estruturadas:</p>
-        
-        <div class="typo-display">
-          <div class="typo-specimen" style="font-family: 'Inter', sans-serif; font-weight: 800; letter-spacing: -0.05em;">VERTIC SYSTEM</div>
-          <div class="typo-meta">INTER // PESOS: BOLD, EXTRABOLD // APLICAÇÃO: TÍTULOS E MARCA PRINCIPAL</div>
-        </div>
+                  <!-- SITE 1 — substituir: <video autoplay muted loop playsinline src="site1.mp4"> -->
+                  <div class="mac-site ms1">
+                    <div class="ms1-nav"><div class="ms1-logo"></div><div class="ms1-links"><div class="ms1-link"></div><div class="ms1-link"></div><div class="ms1-link"></div></div></div>
+                    <div class="ms1-body">
+                      <div class="ms1-badge"></div>
+                      <div class="ms1-h1" style="width:90%"></div>
+                      <div class="ms1-h1b"></div>
+                      <div class="ms1-h1c"></div>
+                      <div class="ms1-sub"></div><div class="ms1-sub2"></div>
+                      <div class="ms1-ctas"><div class="ms1-cta1"></div><div class="ms1-cta2"></div></div>
+                    </div>
+                  </div>
 
-        <div class="typo-display">
-          <div class="typo-specimen" style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 22px; letter-spacing: 0.25em;">CORE_ENGINE_V1.0</div>
-          <div class="typo-meta">JETBRAINS MONO // PESOS: REGULAR // APLICAÇÃO: SUBTÍTULOS, TAGS, NÚMEROS E TECH DATA</div>
-        </div>
-      </section>
+                  <!-- SITE 2 — substituir: <video autoplay muted loop playsinline src="site2.mp4"> -->
+                  <div class="mac-site ms2">
+                    <div class="ms2-nav"><div class="ms2-logo"></div><div class="ms2-dot"></div><div class="ms2-sep"></div><div class="ms2-tag"></div></div>
+                    <div class="ms2-grid">
+                      <div class="ms2-card"><div class="ms2-ck"></div><div class="ms2-cv"></div><div class="ms2-cl"></div></div>
+                      <div class="ms2-card"><div class="ms2-ck"></div><div class="ms2-cv"></div><div class="ms2-cl"></div></div>
+                      <div class="ms2-card"><div class="ms2-ck"></div><div class="ms2-cv"></div><div class="ms2-cl"></div></div>
+                    </div>
+                    <div class="ms2-chart">
+                      <div class="ms2-bar"></div><div class="ms2-bar"></div><div class="ms2-bar"></div>
+                      <div class="ms2-bar"></div><div class="ms2-bar"></div><div class="ms2-bar"></div>
+                      <div class="ms2-bar"></div><div class="ms2-bar"></div>
+                    </div>
+                  </div>
 
-      <!-- Section 5: Official Logos -->
-      <section id="logos" class="panel">
-        <span class="section-tag">05 // ARQUIVOS VETORIAIS E UPSCALADOS</span>
-        <h2>Variantes do Logotipo Principal</h2>
-        <p>Estes são os logotipos oficiais. Cada variante está disponível nas cores padrão para fundos escuros (Dark) e adaptada para fundos claros (Light). Todas as imagens PNG contêm fundo transparente e resolução UHD (600 DPI).</p>
-        
-        <div class="grid-2">
-          <!-- Card 1: Stacked Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_stacked.svg" alt="Vertic Stacked Logo" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Stacked Version <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Logo empilhado padrão da holding. Ideal para cartões de visita e caixas de assinatura escuros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_stacked.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_stacked.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
+                  <!-- SITE 3 — substituir: <video autoplay muted loop playsinline src="site3.mp4"> -->
+                  <div class="mac-site ms3">
+                    <div class="ms3-nav"><div class="ms3-logo"></div><div class="ms3-links"><div class="ms3-link"></div><div class="ms3-link"></div><div class="ms3-link"></div></div></div>
+                    <div class="ms3-hero"><div class="ms3-k"></div><div class="ms3-h1"></div><div class="ms3-h2"></div></div>
+                    <div class="ms3-cards">
+                      <div class="ms3-card"><div class="ms3-ico"></div><div class="ms3-ct"></div><div class="ms3-cd"></div><div class="ms3-cd2"></div></div>
+                      <div class="ms3-card"><div class="ms3-ico"></div><div class="ms3-ct"></div><div class="ms3-cd"></div><div class="ms3-cd2"></div></div>
+                      <div class="ms3-card"><div class="ms3-ico"></div><div class="ms3-ct"></div><div class="ms3-cd"></div><div class="ms3-cd2"></div></div>
+                    </div>
+                  </div>
+
+                </div><!-- .mac-track -->
+              </div><!-- .mac-screen -->
+            </div><!-- .mac-bezel -->
+          </div><!-- .mac-lid -->
+          <div class="mac-hinge"></div>
+          <div class="mac-base">
+            <div class="mac-fn"></div>
+            <div class="mac-keys"></div>
+            <div class="mac-pad"></div>
           </div>
+        </div><!-- .mac-body -->
+      </div><!-- #mac-wrap -->
 
-          <!-- Card 2: Stacked Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_stacked_light.svg" alt="Vertic Stacked Logo Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Stacked Version <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste do logo empilhado adaptada para fundos claros e documentos em papel.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_stacked_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_stacked_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
+    </div><!-- .hero-vis -->
+  </div><!-- .hero-inner -->
 
-          <!-- Card 3: Horizontal Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_horizontal.svg" alt="Vertic Horizontal Logo" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Horizontal Logo <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Logo em linha única. Ideal para assinaturas de e-mail e cabeçalhos escuros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_horizontal.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_horizontal.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 4: Horizontal Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_horizontal_light.svg" alt="Vertic Horizontal Logo Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Horizontal Logo <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste do logo em linha única adaptada para cabeçalhos claros e papel timbrado.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_horizontal_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_horizontal_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 5: Header Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_header.svg" alt="Vertic Header Logo" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Header Logo <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Versão de menu superior com identificador da proposta abaixo da marca principal.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_header.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_header.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 6: Header Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_header_light.svg" alt="Vertic Header Logo Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Header Logo <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão de menu superior adaptada para barra de navegação de contraste claro.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_header_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_header_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 7: Icon Dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_icon.svg" alt="Vertic Icon" style="width: 70px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Icon Only <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Apenas o símbolo V-Node. Ideal para favicon de websites, perfis de redes sociais e rodapés.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_icon.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_icon.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Card 8: Icon Light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_icon_light.svg" alt="Vertic Icon Light" style="width: 70px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Icon Only <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste do símbolo V-Node para aplicação em fundos claros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_icon_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_icon_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 6: Special Logos -->
-      <section id="special" class="panel">
-        <span class="section-tag">06 // ELEMENTOS GEOMÉTRICOS & FLUXO</span>
-        <h2>Versões Especiais (Preloader & Marca d'Água)</h2>
-        <p>Abaixo estão as variantes gráficas complexas baseadas no **Triple V-Node** (três linhas em V convergentes no vértice inferior com o nó circular luminoso).</p>
-        
-        <div class="grid-2">
-          <!-- preloader dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_triple_v.svg" alt="Triple V Icon" style="width: 80px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Preloader Symbol <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Ícone de carregamento padrão da holding (Branco / Ciano / Branco).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_triple_v.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_triple_v.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- preloader light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_triple_v_light.svg" alt="Triple V Icon Light" style="width: 80px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Preloader Symbol <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Ícone de carregamento adaptado para interfaces claras (Obsidian / Ciano).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_triple_v_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_triple_v_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- loading screen dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_loading.svg" alt="Loading Screen" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Loading Screen Full <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Assinatura de carregamento completa com a legenda monospace "INICIALIZANDO...".</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_loading.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_loading.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- loading screen light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_loading_light.svg" alt="Loading Screen Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Loading Screen Full <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Assinatura de carregamento para fundos claros com legenda cinza-escura.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_loading_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_loading_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- watermark dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_watermark_hero.svg" alt="Watermark Hero" style="width: 80px;" />
-            </div>
-            <div class="glow-top-left" style="background: radial-gradient(circle, rgba(24, 24, 27, 0.4) 0%, transparent 70%);"></div>
-            <div class="logo-details">
-              <div class="logo-title">Hero Watermark <span class="badge badge-special">WATERMARK</span></div>
-              <div class="logo-desc">Marca d'água de alta escala para o Hero da página. A linha externa é tracejada/eixos.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_watermark_hero.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_watermark_hero.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- watermark light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_watermark_hero_light.svg" alt="Watermark Hero Light" style="width: 80px;" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Hero Watermark <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Marca d'água de alta escala adaptada para o background de seções claras.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_watermark_hero_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_watermark_hero_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 7: Group Companies -->
-      <section id="group" class="panel shift-banner">
-        <span class="section-tag">07 // SUBSIDIÁRIAS DA HOLDING</span>
-        <h2>Empresas e Vértices do Grupo</h2>
-        <p>A VERTIC se ramifica em empresas de atuação especializada no mercado, herdando a estrutura do logotipo institucional e utilizando cores exclusivas como assinatura para cada vertical de negócio. Disponíveis em versões para fundos escuros (Dark) e claros (Light).</p>
-        
-        <div class="grid-2">
-          <!-- fotografia dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_fotografia.svg" alt="Vertic Fotografia" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Fotografia <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Fotografia corporativa. Nó Coral Vermelho (#f43f5e), representando o frame de gravação.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_fotografia.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_fotografia.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- fotografia light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_fotografia_light.svg" alt="Vertic Fotografia Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Fotografia <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Fotografia para aplicação em papéis e fundos claros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_fotografia_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_fotografia_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- consultoria dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_consultoria.svg" alt="Vertic Consultoria" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Consultoria <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Auditoria e Mapeamento de Processos corporativos. Nó Azul Estratégico (#3b82f6).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_consultoria.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_consultoria.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- consultoria light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_consultoria_light.svg" alt="Vertic Consultoria Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Consultoria <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Consultoria para relatórios impressos em fundo branco.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_consultoria_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_consultoria_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- marketing dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_marketing.svg" alt="Vertic Marketing" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Marketing <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Posicionamento digital, funis de alta renda e copy. Nó Roxo Criativo (#a855f7).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_marketing.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_marketing.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- marketing light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_marketing_light.svg" alt="Vertic Marketing Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Marketing <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Marketing para peças gráficas de fundo claro.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_marketing_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_marketing_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- automacoes dark -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_logo_automacoes.svg" alt="Vertic Automações" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Automações <span class="badge badge-dark">DARK</span></div>
-              <div class="logo-desc">Integrações de sistemas e assistentes baseados em IAs. Nó Laranja Robótico (#f97316).</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_automacoes.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_automacoes.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- automacoes light -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">DARK BG</button>
-            <div class="logo-preview light-bg">
-              <img src="logos/vertic_logo_automacoes_light.svg" alt="Vertic Automações Light" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Vertic Automações <span class="badge badge-light">LIGHT</span></div>
-              <div class="logo-desc">Versão em alto contraste da Vertic Automações para fundos e layouts claros.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_logo_automacoes_light.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_logo_automacoes_light.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 8: Alternate Proposals -->
-      <section id="proposals" class="panel">
-        <span class="section-tag">08 // ESTUDOS DE MARCA</span>
-        <h2>Propostas Criativas e Aplicações</h2>
-        <p>Abaixo estão as 5 propostas de variações estruturadas para diferentes verticais da holding e canais de comunicação digital.</p>
-        
-        <div class="grid-2">
-          <!-- Proposal 1 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_proposal_1_neon_cyan.svg" alt="Proposal 1: Neon Cyan" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 1 // Neon Cyan Tech</div>
-              <div class="logo-desc">Paleta de tecnologia focada em ambiente web escuro, utilizando ciano neon (#00f0ff) como luz focal.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_proposal_1_neon_cyan.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_proposal_1_neon_cyan.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 2 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_proposal_2_gold.svg" alt="Proposal 2: Luxury Gold" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 2 // Luxury Gold & Obsidian</div>
-              <div class="logo-desc">Paleta clássica premium dourada (#E5C158). Transmite alto valor, governança e solidez.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_proposal_2_gold.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_proposal_2_gold.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 3 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_proposal_3_royal_blue.svg" alt="Proposal 3: SaaS Blue" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 3 // Corporate Royal Blue</div>
-              <div class="logo-desc">Layout adaptado para fundos claros institucionais e interfaces SaaS tradicionais.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_proposal_3_royal_blue.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_proposal_3_royal_blue.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 4 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_proposal_4_crimson.svg" alt="Proposal 4: Cyber Crimson" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 4 // Cyber Crimson Analytics</div>
-              <div class="logo-desc">Tema focado em alta energia, velocidade e performance de análise. Detalhes em vermelho carmesim.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_proposal_4_crimson.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_proposal_4_crimson.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-
-          <!-- Proposal 5 -->
-          <div class="logo-card">
-            <button class="light-mode-toggle" onclick="toggleLight(this)">LIGHT BG</button>
-            <div class="logo-preview">
-              <img src="logos/vertic_proposal_5_emerald.svg" alt="Proposal 5: Emerald Mint" />
-            </div>
-            <div class="logo-details">
-              <div class="logo-title">Prop. 5 // Emerald Mint ESG</div>
-              <div class="logo-desc">Paleta verde-esmeralda (#10b981). Representa crescimento orgânico estruturado, biosoluções ou ESG.</div>
-            </div>
-            <div class="logo-actions">
-              <a href="logos/vertic_proposal_5_emerald.svg" download class="btn btn-svg">BAIXAR SVG</a>
-              <a href="logos/vertic_proposal_5_emerald.png" download class="btn btn-png">BAIXAR PNG</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 9: Brand Rules -->
-      <section id="rules" class="panel warning-panel">
-        <span class="section-tag" style="color: #ef4444;">09 // REGRAS E BOAS PRÁTICAS</span>
-        <h2 style="color: #ef4444;">O que NÃO deve ser feito</h2>
-        <p>Para preservar o valor da marca VERTIC, atente-se às seguintes restrições de uso:</p>
-        <ul>
-          <li><strong>Não distorça ou achate o logotipo:</strong> A proporção de escala de largura e altura deve ser mantida travada (aspect-ratio).</li>
-          <li><strong>Não mude a proporção do V-Node:</strong> O alinhamento e a distância entre o ícone e o início da tipografia deve ser mantida fiel às variantes especificadas.</li>
-          <li><strong>Não utilize fundos de baixo contraste:</strong> Garanta sempre contraste absoluto. Ao utilizar variantes brancas/claras, dê preferência a backgrounds escuros e limpos, ou utilize as variantes escuras para layouts claros.</li>
-        </ul>
-      </section>
-    </main>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-lbl">Scroll</span>
   </div>
+</div><!-- .hero-sticky -->
+</section>
 
-  <script>
-    // Navigation highlight on scroll
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav a');
+<!-- ════════════════════════════════════════ -->
+<!-- HOW IT WORKS (light)                     -->
+<!-- ════════════════════════════════════════ -->
+<section id="how">
+  <div class="how-inner">
+    <div class="r">
+      <span class="kicker">// Como funciona</span>
+      <h2 class="s-title" style="color:var(--noir)">Três etapas para<br>mudar de patamar.</h2>
+      <p class="s-sub">Do primeiro contato até a operação completa: construímos sua presença de forma cirúrgica, escalável e mensurável.</p>
+    </div>
 
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= (sectionTop - 200)) {
-          current = section.getAttribute('id');
-        }
-      });
+    <div class="steps r" style="transition-delay:.1s">
+      <div class="step">
+        <span class="step-num">01 //</span>
+        <div class="step-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Identidade de Alto Padrão</h3>
+        <p class="step-desc">Logo, paleta, tipografia e landing page que colocam o seu negócio no mesmo patamar visual de grandes corporações.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02 //</span>
+        <div class="step-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Tráfego com Precisão</h3>
+        <p class="step-desc">Gestão de anúncios cirúrgica no Meta e Google. Menos verba queimada, mais clientes qualificados chegando até você.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03 //</span>
+        <div class="step-ico">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        <h3 class="step-title">Cockpit de Dados em Tempo Real</h3>
+        <p class="step-desc">Painel exclusivo que centraliza todas as suas métricas. Decisões por dados, não por achismo.</p>
+      </div>
+    </div>
 
-      navLinks.forEach(a => {
-        a.classList.remove('active');
-        if (a.getAttribute('href') === '#' + current) {
-          a.classList.add('active');
-        }
-      });
-    });
+    <!-- Dashboard mockup -->
+    <div class="showcase r" style="transition-delay:.2s">
+      <div class="sc-chrome">
+        <div class="sc-dots">
+          <div class="sc-dot" style="background:#ef4444"></div>
+          <div class="sc-dot" style="background:#f59e0b"></div>
+          <div class="sc-dot" style="background:#10b981"></div>
+        </div>
+        <div class="sc-url">vertic.app/cockpit — Growth Dashboard // LIVE</div>
+      </div>
+      <div class="sc-body">
+        <div class="sc-widget">
+          <div class="sc-k">// Reach Total</div>
+          <span class="sc-v" id="sw-reach">0</span>
+          <div class="sc-l">pessoas alcançadas</div>
+          <div class="sc-bars">
+            <div class="sc-bar" style="height:30%;background:rgba(168,85,247,.15)"></div>
+            <div class="sc-bar" style="height:44%;background:rgba(168,85,247,.2)"></div>
+            <div class="sc-bar" style="height:38%;background:rgba(168,85,247,.2)"></div>
+            <div class="sc-bar" style="height:65%;background:rgba(168,85,247,.4)"></div>
+            <div class="sc-bar" style="height:58%;background:rgba(168,85,247,.4)"></div>
+            <div class="sc-bar" style="height:82%;background:rgba(168,85,247,.6)"></div>
+            <div class="sc-bar" style="height:76%;background:rgba(168,85,247,.6)"></div>
+            <div class="sc-bar" style="height:100%;background:rgba(168,85,247,.8)"></div>
+          </div>
+        </div>
+        <div class="sc-widget">
+          <div class="sc-k">// Leads Gerados</div>
+          <span class="sc-v" id="sw-leads">0</span>
+          <div class="sc-l">este mês</div>
+          <div class="sc-bars">
+            <div class="sc-bar" style="height:22%;background:rgba(168,85,247,.15)"></div>
+            <div class="sc-bar" style="height:36%;background:rgba(168,85,247,.2)"></div>
+            <div class="sc-bar" style="height:50%;background:rgba(168,85,247,.3)"></div>
+            <div class="sc-bar" style="height:62%;background:rgba(168,85,247,.4)"></div>
+            <div class="sc-bar" style="height:74%;background:rgba(168,85,247,.5)"></div>
+            <div class="sc-bar" style="height:84%;background:rgba(168,85,247,.6)"></div>
+            <div class="sc-bar" style="height:94%;background:rgba(168,85,247,.7)"></div>
+            <div class="sc-bar" style="height:100%;background:rgba(168,85,247,.85)"></div>
+          </div>
+        </div>
+        <div class="sc-widget">
+          <div class="sc-k">// ROAS Médio</div>
+          <span class="sc-v" style="color:#10b981">4.8×</span>
+          <div class="sc-l">retorno sobre verba</div>
+          <div class="sc-bars">
+            <div class="sc-bar" style="height:28%;background:rgba(16,185,129,.15)"></div>
+            <div class="sc-bar" style="height:40%;background:rgba(16,185,129,.2)"></div>
+            <div class="sc-bar" style="height:54%;background:rgba(16,185,129,.3)"></div>
+            <div class="sc-bar" style="height:66%;background:rgba(16,185,129,.4)"></div>
+            <div class="sc-bar" style="height:76%;background:rgba(16,185,129,.55)"></div>
+            <div class="sc-bar" style="height:86%;background:rgba(16,185,129,.65)"></div>
+            <div class="sc-bar" style="height:94%;background:rgba(16,185,129,.75)"></div>
+            <div class="sc-bar" style="height:100%;background:rgba(16,185,129,.9)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    // Toggle preview background for SVG transparency check
-    function toggleLight(button) {
-      const preview = button.nextElementSibling;
-      preview.classList.toggle('light-bg');
-      if (preview.classList.contains('light-bg')) {
-        button.innerText = (button.innerText.includes('LIGHT')) ? 'DARK BG' : 'LIGHT BG';
-      } else {
-        button.innerText = (button.innerText.includes('LIGHT')) ? 'DARK BG' : 'LIGHT BG';
-      }
+<!-- ════════════════════════════════════════ -->
+<!-- RESULTS (dark)                           -->
+<!-- ════════════════════════════════════════ -->
+<section id="results">
+  <div class="res-inner">
+    <div class="r">
+      <span class="kicker">// Resultados</span>
+      <h2 class="s-title">Números que<br>não mentem.</h2>
+      <p class="s-sub" style="color:var(--text-sec)">Cada cliente que entra no sistema Vertic passa a operar com métricas que antes eram exclusivas de grandes corporações.</p>
+      <a href="#pricing" class="btn-p" style="margin-top:32px;display:inline-block">Ver Planos e Preços</a>
+    </div>
+    <div class="res-grid r" style="transition-delay:.15s">
+      <div class="res-card">
+        <span class="res-val">+<span class="cnt" data-t="312">0</span>%</span>
+        <span class="res-lbl">Aumento de Reach</span>
+        <p class="res-desc">Crescimento médio de alcance nos primeiros 90 dias</p>
+      </div>
+      <div class="res-card">
+        <span class="res-val">-<span class="cnt" data-t="32">0</span>%</span>
+        <span class="res-lbl">Redução de CPA</span>
+        <p class="res-desc">Custo por aquisição com funil otimizado</p>
+      </div>
+      <div class="res-card">
+        <span class="res-val"><span class="cnt" data-t="4" data-s=".8">0</span>×</span>
+        <span class="res-lbl">ROAS Médio</span>
+        <p class="res-desc">Retorno sobre verba em mídia paga</p>
+      </div>
+      <div class="res-card">
+        <span class="res-val"><span class="cnt" data-t="3">0</span> sem</span>
+        <span class="res-lbl">Entrega Alpha Genesis</span>
+        <p class="res-desc">Do briefing ao site no ar em semanas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- THE DARK CHOICE — divider               -->
+<!-- ════════════════════════════════════════ -->
+<div class="dc-block transition-block">
+  <span class="dc-tag">// the dark choice</span>
+  <h2 class="dc-title r">Chega de Parecer Pequeno.</h2>
+  <p class="dc-sub r" style="transition-delay:.12s">Seu produto é excelente. Sua operação funciona. O problema é que o mercado não enxerga isso — porque a sua presença não comunica o nível que você entrega.</p>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PRICING                                  -->
+<!-- ════════════════════════════════════════ -->
+<section id="pricing">
+  <div class="pr-glow pr-glow-1"></div>
+  <div class="pr-glow pr-glow-2"></div>
+  <div class="pr-glow pr-glow-3"></div>
+  <div class="pr-inner">
+    <div class="pr-head r">
+      <span class="kicker">// Escolha seu plano</span>
+      <h2 class="s-title" style="color:#fff">Contratar é simples.<br><span style="color:var(--purple)">Crescer é o que vem depois.</span></h2>
+      <p class="s-sub" style="color:var(--text-sec);margin:0 auto">Três módulos com escopo claro, entrega definida e preço transparente. Sem surpresas.</p>
+    </div>
+
+    <div class="pain-strip r" style="transition-delay:.08s">
+      <div class="pain-card">
+        <span class="pain-code">// DOR_01</span>
+        <h4>Visual que Não Converte</h4>
+        <p>Site genérico faz o cliente ir embora antes de você falar uma palavra.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-code">// DOR_02</span>
+        <h4>Tráfego Pago Queimando</h4>
+        <p>Verba saindo todo mês sem ROI mensurável ou previsível.</p>
+      </div>
+      <div class="pain-card">
+        <span class="pain-code">// DOR_03</span>
+        <h4>Dados que Ninguém Lê</h4>
+        <p>Métricas em 4 plataformas, decisões no achismo.</p>
+      </div>
+    </div>
+
+    <div class="pr-grid">
+
+      <div class="pc r" style="transition-delay:.1s">
+        <div class="pc-glare"></div>
+        <span class="pc-mod">// Módulo 01</span>
+        <div class="pc-name">Alpha Genesis</div>
+        <p class="pc-tag">A porta de entrada. Identidade premium + landing page. Alto impacto, entrega rápida.</p>
+        <div class="pc-price">
+          <span class="pc-cur">R$</span>
+          <span class="pc-val">890</span>
+        </div>
+        <div class="pc-per">pagamento único</div>
+        <p class="pc-note">Sem mensalidade. Projeto fechado.</p>
+        <div class="pc-div"></div>
+        <ul class="pc-feats">
+          <li>Identidade visual completa</li>
+          <li>Landing page de alta conversão</li>
+          <li>Entrega em até 3 semanas</li>
+          <li>Revisões ilimitadas incluso</li>
+          <li>Todos os arquivos editáveis</li>
+        </ul>
+        <a href="#" class="pc-cta">Contratar Alpha Genesis →</a>
+      </div>
+
+      <div class="pc feat r" style="transition-delay:.2s">
+        <div class="pc-glare"></div>
+        <div class="feat-badge">⚡ Mais Escolhido</div>
+        <span class="pc-mod">// Módulo 02</span>
+        <div class="pc-name">Growth Vector</div>
+        <p class="pc-tag">Tráfego pago + autoridade em vídeo. Da entrega pontual à recorrência com ROI mensurável.</p>
+        <div class="pc-price">
+          <span class="pc-cur">R$</span>
+          <span class="pc-val">2.900</span>
+        </div>
+        <div class="pc-per">por mês</div>
+        <p class="pc-note">Contrato mínimo de 3 meses.</p>
+        <div class="pc-div"></div>
+        <ul class="pc-feats">
+          <li>Gestão de anúncios Meta + Google</li>
+          <li>Roteiros de vídeo de autoridade</li>
+          <li>Otimização contínua de funil</li>
+          <li>Relatório mensal de performance</li>
+          <li>Reunião estratégica mensal</li>
+        </ul>
+        <a href="#" class="pc-cta">Contratar Growth Vector →</a>
+      </div>
+
+      <div class="pc r" style="transition-delay:.3s">
+        <div class="pc-glare"></div>
+        <span class="pc-mod">// Módulo 03 · Full Stack</span>
+        <div class="pc-name">Vertic OS</div>
+        <p class="pc-tag">Operação completa com cockpit de dados exclusivo e Growth Analyst dedicado em tempo real.</p>
+        <div class="pc-price">
+          <span class="pc-cur">R$</span>
+          <span class="pc-val">8.900</span>
+        </div>
+        <div class="pc-per">por mês</div>
+        <p class="pc-note">Contrato anual. Priority onboarding.</p>
+        <div class="pc-div"></div>
+        <ul class="pc-feats">
+          <li>Tudo do Growth Vector</li>
+          <li>Gestão completa de redes e SEO</li>
+          <li>Cockpit de dados em tempo real (BI)</li>
+          <li>Growth Data Analyst dedicado</li>
+          <li>Reunião semanal + relatório mensal</li>
+        </ul>
+        <a href="#" class="pc-cta">Contratar Vertic OS →</a>
+      </div>
+
+    </div>
+
+    <p class="pr-foot r" style="transition-delay:.35s">
+      Dúvidas antes de contratar? <a href="#">Fale diretamente com o time →</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">
+    <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+      <path d="M20 25 L50 75 L80 25" stroke="#71717a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="50" cy="75" r="10" fill="#a855f7"/>
+    </svg>
+    <div>
+      <span class="logo-name">VERTIC</span>
+      <span class="logo-sub">Marketing</span>
+    </div>
+  </div>
+  <span class="foot-copy">© 2026 VERTIC — Todos os direitos reservados</span>
+</footer>
+
+<script>
+// ── PARTICLES ──
+const cv = document.getElementById('canvas');
+const cx = cv.getContext('2d');
+let pts = [];
+const mo = { x: null, y: null };
+
+function resize() { cv.width = innerWidth; cv.height = innerHeight; }
+addEventListener('resize', resize); resize();
+addEventListener('mousemove', e => { mo.x = e.clientX; mo.y = e.clientY; });
+addEventListener('mouseout', () => { mo.x = null; mo.y = null; });
+
+class P {
+  constructor() {
+    this.x = Math.random() * cv.width; this.y = Math.random() * cv.height;
+    this.vx = (Math.random()-.5)*.15; this.vy = (Math.random()-.5)*.15;
+    this.r = Math.random()*1.2+.4;
+  }
+  step() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x<0||this.x>cv.width)  this.vx*=-1;
+    if (this.y<0||this.y>cv.height) this.vy*=-1;
+    if (mo.x!=null) {
+      const dx=mo.x-this.x, dy=mo.y-this.y, d=Math.hypot(dx,dy);
+      if (d<160) { const f=(160-d)/160*.01; this.x+=dx*f; this.y+=dy*f; }
     }
-  </script>
+  }
+  draw() { cx.beginPath(); cx.arc(this.x,this.y,this.r,0,7); cx.fillStyle='rgba(168,85,247,.16)'; cx.fill(); }
+}
+
+function spawn() { pts=[]; const n=Math.min(Math.floor(cv.width*cv.height/8500),120); for(let i=0;i<n;i++) pts.push(new P()); }
+spawn(); addEventListener('resize', spawn);
+
+(function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  for(let i=0;i<pts.length;i++){
+    pts[i].step(); pts[i].draw();
+    for(let j=i+1;j<pts.length;j++){
+      const d=Math.hypot(pts[i].x-pts[j].x, pts[i].y-pts[j].y);
+      if(d<105){ cx.beginPath(); cx.moveTo(pts[i].x,pts[i].y); cx.lineTo(pts[j].x,pts[j].y); cx.strokeStyle=`rgba(168,85,247,${(105-d)/105*.05})`; cx.lineWidth=.4; cx.stroke(); }
+    }
+  }
+  requestAnimationFrame(loop);
+})();
+
+// ── HEADER ──
+const hdr = document.getElementById('hdr');
+addEventListener('scroll', () => hdr.classList.toggle('stuck', scrollY > 60), { passive: true });
+
+// ── V-NODE DRAW ──
+setTimeout(() => {
+  document.querySelectorAll('.vp').forEach(p => p.classList.add('draw'));
+  setTimeout(() => document.querySelectorAll('.vn').forEach(n => n.classList.add('grow')), 1700);
+}, 500);
+
+// ── REVEAL ──
+const ro = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.r').forEach(el => ro.observe(el));
+
+// ── COUNTERS ──
+const co = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = +el.dataset.t, suffix = el.dataset.s || '';
+    const step = target / (1600/16); let cur = 0;
+    const t = setInterval(() => {
+      cur = Math.min(cur+step, target);
+      el.textContent = Math.floor(cur) + suffix;
+      if (cur >= target) clearInterval(t);
+    }, 16);
+    co.unobserve(el);
+  });
+}, { threshold: .5 });
+document.querySelectorAll('.cnt').forEach(c => co.observe(c));
+
+// ── SHOWCASE COUNTERS ──
+const sco = new IntersectionObserver(es => {
+  if (!es[0].isIntersecting) return;
+  countUp(document.getElementById('sw-reach'), 48300);
+  countUp(document.getElementById('sw-leads'), 143);
+  sco.unobserve(es[0].target);
+}, { threshold: .3 });
+const sc = document.querySelector('.showcase');
+if (sc) sco.observe(sc);
+
+function countUp(el, target) {
+  const step = target/(1600/16); let cur = 0;
+  const t = setInterval(() => {
+    cur = Math.min(cur+step, target);
+    el.textContent = Math.floor(cur).toLocaleString('pt-BR');
+    if (cur >= target) clearInterval(t);
+  }, 16);
+}
+
+// ── LIQUID GLASS 3D TILT ──
+document.querySelectorAll('.pc').forEach(card => {
+  let raf;
+  const glare = card.querySelector('.pc-glare');
+
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'box-shadow .4s ease';
+  });
+
+  card.addEventListener('mousemove', e => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const r = card.getBoundingClientRect();
+      const nx = (e.clientX - r.left - r.width  / 2) / (r.width  / 2); // -1 → 1
+      const ny = (e.clientY - r.top  - r.height / 2) / (r.height / 2); // -1 → 1
+      const rotY =  nx * 12;
+      const rotX = -ny * 10;
+      card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(16px) scale(1.02)`;
+      if (glare) {
+        const gx = ((e.clientX - r.left) / r.width)  * 100;
+        const gy = ((e.clientY - r.top)  / r.height) * 100;
+        glare.style.opacity = '1';
+        glare.style.background = `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,.14) 0%, transparent 60%)`;
+      }
+    });
+  });
+
+  card.addEventListener('mouseleave', () => {
+    cancelAnimationFrame(raf);
+    card.style.transition = 'transform .7s cubic-bezier(.23,1,.32,1), box-shadow .4s ease';
+    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0) scale(1)';
+    if (glare) glare.style.opacity = '0';
+  });
+});
+
+// ── SCROLL HERO → GLITCH → MACBOOK ──
+(function() {
+  const vnode  = document.getElementById('vnode-wrap');
+  const macEl  = document.getElementById('mac-wrap');
+  const heroEl = document.getElementById('hero');
+  if (!vnode || !macEl || !heroEl) return;
+
+  // Progresso 0→1 dentro do range extra do hero sticky (260vh - 100vh = 160vh)
+  function progress() {
+    const scrolled = window.scrollY - heroEl.offsetTop;
+    const range    = heroEl.offsetHeight - window.innerHeight;
+    return Math.min(Math.max(scrolled / range, 0), 1);
+  }
+
+  // Interpola valor entre a e b
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  // Ease out cubic
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+  let rafId;
+  function onScroll() {
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(update);
+  }
+
+  function update() {
+    const p = progress();
+
+    // ── V-Node glitch ──
+    // 0–0.22: repouso
+    // 0.22–0.52: glitch leve
+    // 0.52–0.70: glitch pesado
+    // 0.70–0.82: dissolve
+    vnode.classList.remove('gl-low', 'gl-high', 'gl-exit');
+    if (p >= 0.70) {
+      vnode.classList.add('gl-exit');
+    } else if (p >= 0.52) {
+      vnode.classList.add('gl-high');
+      vnode.style.opacity = '';
+      vnode.style.filter  = '';
+    } else if (p >= 0.22) {
+      vnode.classList.add('gl-low');
+      vnode.style.opacity = '';
+      vnode.style.filter  = '';
+    } else {
+      vnode.style.opacity = '';
+      vnode.style.filter  = '';
+    }
+
+    // ── MacBook entrada (progress 0.48 → 1.0) ──
+    const macP = Math.min(Math.max((p - 0.48) / 0.52, 0), 1);
+    const e    = easeOut(macP);
+    const tx   = lerp(55, 0, e);
+    const ry   = lerp(-15, 0, e);
+    const sc   = lerp(0.88, 1, e);
+    const op   = e;
+
+    macEl.style.opacity   = op;
+    macEl.style.transform = `translateX(${tx}px) rotateY(${ry}deg) scale(${sc})`;
+    macEl.classList.toggle('mac-in', macP > 0.8);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update(); // estado inicial
+})();
+</script>
 </body>
 </html>
