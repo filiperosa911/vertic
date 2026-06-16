@@ -465,10 +465,24 @@
       position: absolute;
       inset: 0;
       z-index: 50;
-      background: var(--noir);
+      background: var(--light);
       pointer-events: none;
       opacity: 0; /* invisível até o GSAP ativar a fase de zoom */
     }
+
+    /* Conteúdo da próxima seção visível através da janela que se expande */
+    #zoom-preview {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 64px;
+      overflow: hidden;
+    }
+    #zoom-preview .kicker { color: var(--purple); }
+    #zoom-preview .s-title { color: var(--noir); margin-bottom: 20px; }
+    #zoom-preview .s-sub   { color: #3f3f46; max-width: 640px; }
 
     /* Marcador de scroll — só posiciona, sem visual */
     #zoom-start-marker {
@@ -2085,7 +2099,14 @@
         <span class="scroll-lbl">Scroll</span>
       </div>
       <!-- Janela que expande da tela do Mac até cobrir o viewport -->
-      <div id="zoom-reveal"></div>
+      <div id="zoom-reveal">
+        <!-- Preview da seção #how: renderizada em tamanho real, revelada pela máscara -->
+        <div id="zoom-preview">
+          <span class="kicker">// Como funciona</span>
+          <h2 class="s-title">Três etapas para<br>mudar de patamar.</h2>
+          <p class="s-sub">Do primeiro contato até a operação completa: construímos sua presença de forma cirúrgica, escalável e mensurável.</p>
+        </div>
+      </div>
 
     </div><!-- .hero-sticky -->
 
@@ -2608,11 +2629,24 @@
 
       if (!reveal || !heroLeft || !macFrame || !screenArea || !marker) return;
 
-      // Enquanto .hero-sticky está sticky (top:0), getBoundingClientRect
-      // retorna a posição real e estável no viewport — sem precisar de offset.
+      // mac-wrap tem transform ativo no load (translateX/rotateY/scale) que distorce
+      // getBoundingClientRect dos filhos. Computamos a partir de hero-vis (sem transform).
       function computeClipStart() {
-        const r = screenArea.getBoundingClientRect();
-        return `inset(${Math.round(r.top)}px ${Math.round(window.innerWidth - r.right)}px ${Math.round(window.innerHeight - r.bottom)}px ${Math.round(r.left)}px round 10px)`;
+        const heroVis = document.querySelector('.hero-vis');
+        const vr      = heroVis.getBoundingClientRect();
+        const frameW  = 702;                         // mac-frame-wrap width (CSS)
+        const frameH  = frameW * (357 / 586);        // razão PNG 586×357 → ~427.7px
+        const frameTp = (vr.height - frameH) / 2;   // centralizado verticalmente em hero-vis
+        // Percentuais do CSS de .mac-screen-area: left 8.8%, top 3.6%, w 82.8%, h 84.2%
+        const sL = vr.left + frameW * 0.088;
+        const sT = vr.top  + frameTp + frameH * 0.036;
+        const sW = frameW  * 0.828;
+        const sH = frameH  * 0.842;
+        const t = Math.round(sT);
+        const r = Math.round(window.innerWidth  - (sL + sW));
+        const b = Math.round(window.innerHeight - (sT + sH));
+        const l = Math.round(sL);
+        return `inset(${t}px ${r}px ${b}px ${l}px round 10px)`;
       }
 
       const clipEnd = 'inset(0px 0px 0px 0px round 0px)';
