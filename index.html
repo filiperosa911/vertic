@@ -10,6 +10,8 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <style>
     *,
     *::before,
@@ -171,7 +173,7 @@
 
     /* ── HERO ── */
     #hero {
-      min-height: 260vh;
+      min-height: 410vh;
       background: var(--noir);
       position: relative;
     }
@@ -456,6 +458,30 @@
       width: 1px;
       background: var(--border);
       align-self: stretch;
+    }
+
+    /* ── Zoom reveal overlay ── */
+    #zoom-reveal {
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      background: var(--noir);
+      pointer-events: none;
+      /* clip-path inicial definido via JS — começa do tamanho da tela do Mac */
+    }
+
+    /* Marcador de scroll — só posiciona, sem visual */
+    #zoom-start-marker {
+      position: absolute;
+      top: 260vh;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #zoom-reveal { display: none; }
     }
 
     /* scroll hint */
@@ -1963,7 +1989,7 @@
       <div class="grid-bg"></div>
 
       <div class="hero-inner">
-        <div>
+        <div id="hero-left">
           <div class="hero-badge">// Vertic Marketing System</div>
           <h1 class="hero-title">
             A Estética<br>
@@ -2058,7 +2084,14 @@
         <div class="scroll-line"></div>
         <span class="scroll-lbl">Scroll</span>
       </div>
+      <!-- Janela que expande da tela do Mac até cobrir o viewport -->
+      <div id="zoom-reveal"></div>
+
     </div><!-- .hero-sticky -->
+
+    <!-- Marcador de início da fase zoom: posicionado em 260vh dentro do #hero -->
+    <div id="zoom-start-marker"></div>
+
   </section>
 
   <!-- ════════════════════════════════════════ -->
@@ -2487,11 +2520,13 @@
       const heroEl = document.getElementById('hero');
       if (!vnode || !macEl || !heroEl) return;
 
-      // Progresso 0→1 dentro do range extra do hero sticky (260vh - 100vh = 160vh)
+      // Progresso 0→1 fixo nos primeiros 160vh de scroll dentro do hero
+      // (260vh original - 100vh viewport = 160vh de animação de glitch/entrada)
+      // Os 150vh extras são usados pela transição zoom do GSAP
       function progress() {
         const scrolled = window.scrollY - heroEl.offsetTop;
-        const range = heroEl.offsetHeight - window.innerHeight;
-        return Math.min(Math.max(scrolled / range, 0), 1);
+        const animRange = window.innerHeight * 1.6;
+        return Math.min(Math.max(scrolled / animRange, 0), 1);
       }
 
       // Interpola valor entre a e b
@@ -2546,6 +2581,92 @@
       window.addEventListener('scroll', onScroll, { passive: true });
       update(); // estado inicial
     })();
+
+  // ─── ZOOM "VOAR PARA DENTRO DO MAC" (GSAP ScrollTrigger) ─────────────────
+  (function initZoom() {
+    // Guarda reducida-motion e mobile
+    if (window.innerWidth < 768) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function ready(fn) {
+      if (document.readyState === 'complete') fn();
+      else window.addEventListener('load', fn);
+    }
+
+    ready(function () {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const reveal     = document.getElementById('zoom-reveal');
+      const heroLeft   = document.getElementById('hero-left');
+      const macFrame   = document.querySelector('.mac-frame');
+      const macVideo   = document.querySelector('.mac-video');
+      const screenArea = document.querySelector('.mac-screen-area');
+      const heroEl     = document.getElementById('hero');
+      const marker     = document.getElementById('zoom-start-marker');
+
+      if (!reveal || !heroLeft || !macFrame || !screenArea || !marker) return;
+
+      // Calcula o clip-path inicial baseado na posição real da tela do Mac
+      // quando .hero-sticky está em sticky (top:0). Ajuste por heroEl.offsetTop.
+      function computeClipStart() {
+        const r       = screenArea.getBoundingClientRect();
+        const heroTop = heroEl.offsetTop;
+        const docT    = r.top    + window.scrollY;
+        const docB    = r.bottom + window.scrollY;
+        const docL    = r.left   + window.scrollX;
+        const docR    = r.right  + window.scrollX;
+
+        // Posição no viewport quando hero-sticky está em top:0
+        const vt = Math.round(docT - heroTop);
+        const vb = Math.round(window.innerHeight - (docB - heroTop));
+        const vl = Math.round(docL);
+        const vr = Math.round(window.innerWidth - docR);
+
+        return `inset(${vt}px ${vr}px ${vb}px ${vl}px round 10px)`;
+      }
+
+      const clipStart = computeClipStart();
+      const clipEnd   = 'inset(0px 0px 0px 0px round 0px)';
+
+      // Aplica clip-path inicial (escondido atrás do hero antes de começar)
+      gsap.set(reveal, { clipPath: clipStart });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger : marker,
+          start   : 'top top',
+          end     : '+=150%',
+          scrub   : 1,
+          // Recalcula posição inicial ao redimensionar
+          onRefresh() {
+            gsap.set(reveal, { clipPath: computeClipStart() });
+          }
+        }
+      });
+
+      tl
+        // 0–40%: texto da esquerda some
+        .to(heroLeft,  { opacity: 0, ease: 'power1.in', duration: 0.4 }, 0)
+        // 30–60%: chassi e vídeo do Mac somem
+        .to(macFrame,  { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0.3)
+        .to(macVideo,  { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0.3)
+        // 0–100%: janela cresce da tela do Mac até cobrir o viewport
+        .to(reveal,    { clipPath: clipEnd, ease: 'power2.inOut', duration: 1 }, 0);
+
+      // Restaura opacity do heroLeft quando volta (scroll reverso)
+      ScrollTrigger.create({
+        trigger : marker,
+        start   : 'top bottom',
+        onLeaveBack() {
+          gsap.set(heroLeft, { opacity: 1 });
+          gsap.set(macFrame,  { opacity: 1 });
+          gsap.set(macVideo,  { opacity: 1 });
+        }
+      });
+    });
+  })();
   </script>
 </body>
 
