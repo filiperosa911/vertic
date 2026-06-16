@@ -192,6 +192,41 @@ Alpha Genesis converte (impacto visual barato e rápido) → Growth Vector cria 
 - [x] SVGs disponíveis em `logos/` — integrados ao manual via `<img>`. Workaround `.txt` obsoleto.
 - [x] Confirmar paleta da Vertic Wealth além do dourado (tokens de texto/borda do tema claro). → Definidos na seção 3.
 - [x] Atualizar o manual `index.html` para a arquitetura B → manual em `manual/index.html`, completo.
-- [ ] Construir landing Marketing — começar pela Fase 1 (Hero/Boot). → `index.html` raiz será sobrescrito com este site.
+- [x] Construir landing Marketing — Fase 1 (Hero/Boot) em andamento. Ver seção 12.
 - [x] Definir tokens completos do tema claro (borda, texto secundário, muted) para Marketing e Wealth. → Definidos na seção 3.
 - [x] Consolidar estratégia GTM da Marketing no v2 (libera o `transicao_outro_agente` para deleção).
+- [ ] Logos Vertic Tech e Vertic Wealth — ainda não criados.
+- [ ] Landing Marketing: seções #how, #results, The Dark Choice, mobile, footer.
+
+---
+
+## 12. Estado de desenvolvimento — Landing Vertic Marketing (atualizado 2026-06-16)
+
+**Arquivo:** `index.html` na raiz de `VERTIC_TESTES`. Repo: `filiperosa911/vertic` (GitHub Pages).
+
+### Seções implementadas
+
+| Seção | Status | Observações |
+|---|---|---|
+| Header | ✅ Completo | Logo SVG, nav, CTA, sticky |
+| Hero — texto esquerdo | ✅ Completo | Badge, título, subtítulo, CTAs, tags público |
+| Hero — animação scroll | ✅ Completo | V-Node glitch (low/high/exit) + MacBook entry |
+| Hero — MacBook PNG | ✅ Completo | PNG 702px, clip-path SVG evenodd, vídeo na tela |
+| Pricing cards | ✅ Completo | Liquid glass, 3 planos, badge destaque |
+| #how (Como Funciona) | ⬜ Placeholder | Precisa de design e conteúdo |
+| #results (Resultados) | ⬜ Placeholder | Precisa de cases e métricas |
+| The Dark Choice | ⬜ Não iniciado | Transição claro→escuro no fechamento |
+| Mobile | ⬜ Não iniciado | Decisão: showcase simples abaixo do hero |
+| Footer | ⬜ Não existe | — |
+
+### Detalhes técnicos do Hero (scroll-driven)
+
+- `#hero`: `min-height: 260vh`, `position: relative`
+- `.hero-sticky`: `position: sticky; top: 0; height: 100vh`
+- Progresso do scroll: `(scrollY − hero.offsetTop) / (hero.offsetHeight − innerHeight)` → 0..1
+- Glitch V-Node: 0.22→0.52 (low), 0.52→0.70 (high), 0.70+ (exit)
+- MacBook entry: `macP = (p − 0.48) / 0.52`, easeOut cúbico
+- MacBook size: `.mac-frame-wrap: 702px`, `.hero-vis: 702×676px`
+- Clip-path (SVG global `id="mac-cut"`): inner rect `0.088,0.036 → 0.916,0.878`
+- `.mac-screen-area`: `left:8.8% top:3.6% width:82.8% height:84.2% border-radius:10px 10px 0 0`
+- Tela: `<video src="assets/sites-video.mp4" autoplay muted loop playsinline>`
