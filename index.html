@@ -1358,10 +1358,10 @@
     /* Conteúdo que aparece pela tela (fica ATRÁS do PNG) */
     .mac-screen-area {
       position: absolute;
-      left: 4.1%;
-      top: 3.7%;
-      width: 91.8%;
-      height: 75.4%;
+      left: 9.90%;
+      top: 4.48%;
+      width: 80.03%;
+      height: 82.07%;
       z-index: 1;
       overflow: hidden;
       background: #050508;
@@ -1386,6 +1386,12 @@
       position: absolute;
       inset: 0;
       overflow: hidden;
+    }
+    .mac-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     /* Screen content track — 3 "sites" stacked */
@@ -1919,7 +1925,7 @@
       -->
         <path clip-rule="evenodd" d="
         M0,0 L1,0 L1,1 L0,1 Z
-        M0.041,0.037 L0.959,0.037 L0.959,0.791 L0.041,0.791 Z
+        M0.0990,0.0448 L0.8993,0.0448 L0.8993,0.8655 L0.0990,0.8655 Z
       " />
       </clipPath>
     </defs>
@@ -2032,109 +2038,11 @@
             <div class="mac-frame-wrap">
               <!-- Conteúdo da tela — fica ATRÁS do PNG (z-index: 1) -->
               <div class="mac-screen-area">
-                <div class="mac-screen">
-                  <div class="mac-track">
-
-                    <!-- SITE 1 — substituir: <video autoplay muted loop playsinline src="site1.mp4"> -->
-                    <div class="mac-site ms1">
-                      <div class="ms1-nav">
-                        <div class="ms1-logo"></div>
-                        <div class="ms1-links">
-                          <div class="ms1-link"></div>
-                          <div class="ms1-link"></div>
-                          <div class="ms1-link"></div>
-                        </div>
-                      </div>
-                      <div class="ms1-body">
-                        <div class="ms1-badge"></div>
-                        <div class="ms1-h1" style="width:90%"></div>
-                        <div class="ms1-h1b"></div>
-                        <div class="ms1-h1c"></div>
-                        <div class="ms1-sub"></div>
-                        <div class="ms1-sub2"></div>
-                        <div class="ms1-ctas">
-                          <div class="ms1-cta1"></div>
-                          <div class="ms1-cta2"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- SITE 2 — substituir: <video autoplay muted loop playsinline src="site2.mp4"> -->
-                    <div class="mac-site ms2">
-                      <div class="ms2-nav">
-                        <div class="ms2-logo"></div>
-                        <div class="ms2-dot"></div>
-                        <div class="ms2-sep"></div>
-                        <div class="ms2-tag"></div>
-                      </div>
-                      <div class="ms2-grid">
-                        <div class="ms2-card">
-                          <div class="ms2-ck"></div>
-                          <div class="ms2-cv"></div>
-                          <div class="ms2-cl"></div>
-                        </div>
-                        <div class="ms2-card">
-                          <div class="ms2-ck"></div>
-                          <div class="ms2-cv"></div>
-                          <div class="ms2-cl"></div>
-                        </div>
-                        <div class="ms2-card">
-                          <div class="ms2-ck"></div>
-                          <div class="ms2-cv"></div>
-                          <div class="ms2-cl"></div>
-                        </div>
-                      </div>
-                      <div class="ms2-chart">
-                        <div class="ms2-bar"></div>
-                        <div class="ms2-bar"></div>
-                        <div class="ms2-bar"></div>
-                        <div class="ms2-bar"></div>
-                        <div class="ms2-bar"></div>
-                        <div class="ms2-bar"></div>
-                        <div class="ms2-bar"></div>
-                        <div class="ms2-bar"></div>
-                      </div>
-                    </div>
-
-                    <!-- SITE 3 — substituir: <video autoplay muted loop playsinline src="site3.mp4"> -->
-                    <div class="mac-site ms3">
-                      <div class="ms3-nav">
-                        <div class="ms3-logo"></div>
-                        <div class="ms3-links">
-                          <div class="ms3-link"></div>
-                          <div class="ms3-link"></div>
-                          <div class="ms3-link"></div>
-                        </div>
-                      </div>
-                      <div class="ms3-hero">
-                        <div class="ms3-k"></div>
-                        <div class="ms3-h1"></div>
-                        <div class="ms3-h2"></div>
-                      </div>
-                      <div class="ms3-cards">
-                        <div class="ms3-card">
-                          <div class="ms3-ico"></div>
-                          <div class="ms3-ct"></div>
-                          <div class="ms3-cd"></div>
-                          <div class="ms3-cd2"></div>
-                        </div>
-                        <div class="ms3-card">
-                          <div class="ms3-ico"></div>
-                          <div class="ms3-ct"></div>
-                          <div class="ms3-cd"></div>
-                          <div class="ms3-cd2"></div>
-                        </div>
-                        <div class="ms3-card">
-                          <div class="ms3-ico"></div>
-                          <div class="ms3-ct"></div>
-                          <div class="ms3-cd"></div>
-                          <div class="ms3-cd2"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div><!-- .mac-track -->
-                </div><!-- .mac-screen -->
+                <video
+                  class="mac-video"
+                  src="assets/sites-video.mp4"
+                  autoplay muted loop playsinline
+                ></video>
               </div><!-- .mac-screen-area -->
 
               <!-- PNG do MacBook por cima — tela "cortada" pelo clip-path -->
