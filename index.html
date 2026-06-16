@@ -173,7 +173,7 @@
 
     /* ── HERO ── */
     #hero {
-      min-height: 410vh;
+      min-height: 510vh;
       background: var(--noir);
       position: relative;
     }
@@ -467,7 +467,7 @@
       z-index: 50;
       background: var(--noir);
       pointer-events: none;
-      /* clip-path inicial definido via JS — começa do tamanho da tela do Mac */
+      opacity: 0; /* invisível até o GSAP ativar a fase de zoom */
     }
 
     /* Marcador de scroll — só posiciona, sem visual */
@@ -2583,8 +2583,9 @@
     })();
 
   // ─── ZOOM "VOAR PARA DENTRO DO MAC" (GSAP ScrollTrigger) ─────────────────
+  // Hero: 510vh total → sticky zone = 410vh
+  // Glitch/entrada: 0–160vh  |  Pausa: 160–260vh  |  Zoom: 260–410vh (150vh)
   (function initZoom() {
-    // Guarda reducida-motion e mobile
     if (window.innerWidth < 768) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -2603,35 +2604,18 @@
       const macFrame   = document.querySelector('.mac-frame');
       const macVideo   = document.querySelector('.mac-video');
       const screenArea = document.querySelector('.mac-screen-area');
-      const heroEl     = document.getElementById('hero');
       const marker     = document.getElementById('zoom-start-marker');
 
       if (!reveal || !heroLeft || !macFrame || !screenArea || !marker) return;
 
-      // Calcula o clip-path inicial baseado na posição real da tela do Mac
-      // quando .hero-sticky está em sticky (top:0). Ajuste por heroEl.offsetTop.
+      // Enquanto .hero-sticky está sticky (top:0), getBoundingClientRect
+      // retorna a posição real e estável no viewport — sem precisar de offset.
       function computeClipStart() {
-        const r       = screenArea.getBoundingClientRect();
-        const heroTop = heroEl.offsetTop;
-        const docT    = r.top    + window.scrollY;
-        const docB    = r.bottom + window.scrollY;
-        const docL    = r.left   + window.scrollX;
-        const docR    = r.right  + window.scrollX;
-
-        // Posição no viewport quando hero-sticky está em top:0
-        const vt = Math.round(docT - heroTop);
-        const vb = Math.round(window.innerHeight - (docB - heroTop));
-        const vl = Math.round(docL);
-        const vr = Math.round(window.innerWidth - docR);
-
-        return `inset(${vt}px ${vr}px ${vb}px ${vl}px round 10px)`;
+        const r = screenArea.getBoundingClientRect();
+        return `inset(${Math.round(r.top)}px ${Math.round(window.innerWidth - r.right)}px ${Math.round(window.innerHeight - r.bottom)}px ${Math.round(r.left)}px round 10px)`;
       }
 
-      const clipStart = computeClipStart();
-      const clipEnd   = 'inset(0px 0px 0px 0px round 0px)';
-
-      // Aplica clip-path inicial (escondido atrás do hero antes de começar)
-      gsap.set(reveal, { clipPath: clipStart });
+      const clipEnd = 'inset(0px 0px 0px 0px round 0px)';
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -2639,32 +2623,22 @@
           start   : 'top top',
           end     : '+=150%',
           scrub   : 1,
-          // Recalcula posição inicial ao redimensionar
-          onRefresh() {
-            gsap.set(reveal, { clipPath: computeClipStart() });
-          }
         }
       });
 
       tl
-        // 0–40%: texto da esquerda some
-        .to(heroLeft,  { opacity: 0, ease: 'power1.in', duration: 0.4 }, 0)
-        // 30–60%: chassi e vídeo do Mac somem
-        .to(macFrame,  { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0.3)
-        .to(macVideo,  { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0.3)
-        // 0–100%: janela cresce da tela do Mac até cobrir o viewport
-        .to(reveal,    { clipPath: clipEnd, ease: 'power2.inOut', duration: 1 }, 0);
+        // Instante 0: revela o overlay no tamanho da tela do Mac
+        .set(reveal, { opacity: 1, clipPath: computeClipStart() })
 
-      // Restaura opacity do heroLeft quando volta (scroll reverso)
-      ScrollTrigger.create({
-        trigger : marker,
-        start   : 'top bottom',
-        onLeaveBack() {
-          gsap.set(heroLeft, { opacity: 1 });
-          gsap.set(macFrame,  { opacity: 1 });
-          gsap.set(macVideo,  { opacity: 1 });
-        }
-      });
+        // 0–40%: texto da esquerda some
+        .to(heroLeft, { opacity: 0, ease: 'power1.in', duration: 0.4 }, 0)
+
+        // 30–60%: chassi PNG e vídeo somem
+        .to(macFrame, { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0.3)
+        .to(macVideo, { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0.3)
+
+        // 0–100%: overlay cresce da tela do Mac até cobrir o viewport
+        .to(reveal, { clipPath: clipEnd, ease: 'power2.inOut', duration: 1 }, 0);
     });
   })();
   </script>
